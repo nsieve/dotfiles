@@ -1,0 +1,38 @@
+# Files/dirs tracked by sync.sh and deployed by install.sh, relative to $HOME.
+# A trailing / means "whole directory". Lines starting with # are ignored.
+#
+# NOT tracked on purpose:
+#   - ~/.config/quickshell/inir      -> the iNiR shell itself, comes from ./setup install
+#   - gtk.css, fuzzel_theme.ini, kitty theme.conf/current-theme.conf, foot colors.ini
+#                                    -> regenerated from the wallpaper by iNiR
+#   - fish conf.d/inir-*.fish        -> written by the iNiR installer
+#   - ~/.config/inir/{backups,installed_*,version*,migrations.json} -> install state
+
+# ── Compositor ──────────────────────────────────────────────
+.config/niri/config.kdl
+.config/niri/config.d/
+
+# ── iNiR shell settings (bar, panels, iris theme, widgets...) ─
+.config/inir/config.json
+
+# ── Terminal / shell / launcher ─────────────────────────────
+.config/kitty/kitty.conf
+.config/foot/foot.ini
+.config/fish/config.fish
+.config/starship.toml
+.config/fuzzel/fuzzel.ini
+.config/nvim/
+
+# ── Input method (Spanish + Pinyin) ─────────────────────────
+.config/fcitx5/profile
+.config/fcitx5/conf/
+
+# ── Toolkit theming / default apps ──────────────────────────
+.config/gtk-3.0/settings.ini
+.config/gtk-4.0/settings.ini
+.config/qt5ct/qt5ct.conf
+.config/qt6ct/qt6ct.conf
+.config/mimeapps.list
+
+# ── Wallpapers ──────────────────────────────────────────────
+Pictures/Wallpapers/
