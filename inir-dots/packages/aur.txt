@@ -6,6 +6,7 @@ inir-deps
 localsend-bin
 otf-space-grotesk
 qt6-avif-image-plugin
+spicetify-cli
 spotify
 ttf-gabarito-git
 ttf-oxanium
@@ -13,6 +14,7 @@ ttf-readex-pro
 ttf-roboto-flex
 ttf-rubik-vf
 ttf-twemoji
+upscayl-bin
 vesktop
 wechat
 whitesur-icon-theme

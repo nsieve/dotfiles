@@ -47,6 +47,17 @@ Notes:
 - The hotspot password is not committed; the new machine keeps its own.
 - Monitor blocks in `90-user-extra.kdl` (`HDMI-A-1`, `eDP-1`) only apply when those outputs exist, so they're harmless elsewhere.
 - `--packages` installs everything in the lists. Watch the prompt for hardware-specific stuff (GPU drivers, microcode).
+- **Spotify theme (Spicetify):** after `--packages` installs `spicetify-cli`, let it patch Spotify:
+  `sudo chmod a+wr /opt/spotify /opt/spotify/Apps -R`, then change wallpaper once (or run
+  `~/.config/quickshell/inir/scripts/colors/apply-spicetify-theme.sh`). iNiR handles the rest.
+- **Spotify fake glass** (blurred wallpaper behind translucent panels), after the step above:
+  ```
+  spicetify config extensions inirGlass.js && spicetify apply
+  systemctl --user daemon-reload
+  systemctl --user enable --now inir-spotify-glass.path inir-spotify-glass.service
+  ```
+  Tint and rim strength: `TINT` / `RIM` at the top of `~/.config/spicetify/Extensions/inirGlass.js`
+  (then `spicetify apply`). Blur: `BLUR` in `~/.config/spicetify/inir-glass/update.sh`.
 - Keep iNiR on a similar version on both machines. iNiR migrates older `config.json` files forward, but not backward.
 
 ## Where to put niri customizations

@@ -34,5 +34,11 @@
 .config/qt6ct/qt6ct.conf
 .config/mimeapps.list
 
+# ── Spotify fake glass (Spicetify extension + wallpaper watcher) ──
+.config/spicetify/Extensions/inirGlass.js
+.config/spicetify/inir-glass/
+.config/systemd/user/inir-spotify-glass.service
+.config/systemd/user/inir-spotify-glass.path
+
 # ── Wallpapers ──────────────────────────────────────────────
 Pictures/Wallpapers/

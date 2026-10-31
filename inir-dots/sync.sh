@@ -31,8 +31,12 @@ while IFS= read -r line; do
     echo "  ok  ~/$p"
 done < "$REPO/paths.txt"
 
-# Don't commit the hotspot password (install.sh keeps the target machine's own one).
 cfg="$STAGE/.config/inir/config.json"
+# iNiR writes config.json in two formats (the shell vs. its jq scripts); normalize so diffs show real changes only.
+if [[ -f "$cfg" ]] && command -v jq >/dev/null; then
+    jq --indent 4 . "$cfg" > "$cfg.tmp" && mv "$cfg.tmp" "$cfg"
+fi
+# Don't commit the hotspot password (install.sh keeps the target machine's own one).
 [[ -f "$cfg" ]] && sed -i '/"hotspot": {/,/}/ s/"password": "[^"]*"/"password": ""/' "$cfg"
 
 rm -rf "$OUT"

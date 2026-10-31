@@ -1,0 +1,10 @@
+[Unit]
+Description=Spotify fake-glass background from the iNiR wallpaper
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/spicetify/inir-glass/update.sh
+
+[Install]
+# Also run at login, so the image comes back after Spotify/Spicetify updates.
+WantedBy=default.target

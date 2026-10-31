@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch the iNiR wallpaper for the Spotify fake-glass background
+
+[Path]
+# iNiR rewrites this file every time the wallpaper changes.
+PathChanged=%h/.local/state/quickshell/user/generated/wallpaper/path.txt
+Unit=inir-spotify-glass.service
+
+[Install]
+WantedBy=default.target
