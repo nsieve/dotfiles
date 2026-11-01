@@ -46,3 +46,9 @@ layer-rule {
 //     match namespace="some-private-overlay"
 //     block-out-from "screencast"
 // }
+
+// Niri's blur behind surfaces that ask for it (iRiS glass set to Blur).
+blur {
+    passes 2
+    offset 1.0
+}

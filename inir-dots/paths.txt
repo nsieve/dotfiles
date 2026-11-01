@@ -19,6 +19,8 @@
 .config/kitty/kitty.conf
 .config/foot/foot.ini
 .config/fish/config.fish
+.config/fish/conf.d/rice.fish
+.config/btop/btop.conf
 .config/starship.toml
 .config/fuzzel/fuzzel.ini
 .config/nvim/

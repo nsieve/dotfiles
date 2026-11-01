@@ -1,0 +1,120 @@
+# Local iRiS patches (apply to the runtime copy, then restart):
+#   patch -d ~/.config/quickshell/inir -p1 < ~/dotfiles/inir-dots/patches/iris-glass.patch && inir restart
+# - iris.appearance.glass.exactTint: keep the chosen glass tint (no automatic legibility floor).
+# - iris.bar.glassColour / iris.bar.glassTint: the bar's own glass colour and opacity ("" / -1 = follow the theme).
+# - The bar's music visualizer stops while the bar is tucked away (it kept the GPU busy while hidden).
+--- a/modules/common/Config.qml	2026-10-11 20:51:46.052129763 +0200
++++ b/modules/common/Config.qml	2026-11-01 20:11:47.575851219 +0100
+@@ -4108,6 +4108,7 @@
+                         property int edgeLine: 10
+                         property real edgeWidth: 1.5
+                         property string edgeColour: "scene"
++                        property bool exactTint: false // local patch (nico): keep `tint` as-is, no legibility floor
+                     }
+                     // Per surface: its own corners (0 = the family's) and its light
+                     // ("inherit" = its identity, "wallpaper", or "off").
+@@ -4141,6 +4142,9 @@
+                     // spans the whole edge as a bar.
+                     property string layout: "island"
+                     property string strip: "clear" // menu bar: "clear" (items on the wallpaper) or "band"
++                    // Local patch (nico): the bar window's own glass. glassColour "" = the material; glassTint -1 = Glass › Tint.
++                    property string glassColour: ""
++                    property int glassTint: -1
+                     // A full-width Island is a bar: what rests at its start, centre and end, in order.
+                     // "island" (the live Island), "workspaces", "window", "time" and piece kinds.
+                     property list<string> fullStart: ["workspaces", "window"]
+--- a/modules/iris/style/IrisStyle.qml	2026-10-11 20:51:46.057129790 +0200
++++ b/modules/iris/style/IrisStyle.qml	2026-11-01 00:25:35.801600040 +0100
+@@ -304,8 +304,11 @@
+     readonly property bool glassWallpaper: root.glassy && !root.glassCompositor
+     readonly property real glassBlurAmount: Math.max(0, Math.min(1, Number(root.glassOptions?.blur ?? 100) / 100))
+     // Solved at the panel's 7:1 so secondary ink still reads on the worst part; the chosen tint is a floor.
++    // Local patch (nico): iris.appearance.glass.exactTint keeps the chosen tint as-is, skipping the legibility floor.
++    readonly property bool glassExactTint: Boolean(root.glassOptions?.exactTint ?? false)
+     readonly property real wallpaperGlassTint: {
+         const chosen = Math.max(0.12, Math.min(0.96, Number(root.glassOptions?.tint ?? 58) / 100))
++        if (root.glassExactTint) return chosen
+         const needed = IrisMood.sampled ? root.legibleVeil("panel", IrisMood.luminance, IrisMood.contrast * 0.5, 1) : 0
+         return Math.max(chosen, Math.min(0.9, needed))
+     }
+@@ -313,7 +316,7 @@
+     // and the accent keep the wallpaper's tint, or every window opened would regenerate every app theme. 4.5:1 there,
+     // not 7: an always-thick Blur left nothing to see through.
+     readonly property bool bodiesCovered: root.glassCompositor && Lume.covered(root.placeOutput)
+-    readonly property real glassTint: root.bodiesCovered
++    readonly property real glassTint: root.bodiesCovered && !root.glassExactTint
+         ? Math.max(root.wallpaperGlassTint, Math.min(0.9, root.legibleVeil("glass", 0.72, 0.18, 1))) : root.wallpaperGlassTint
+     // What the apps wear: the paper itself, solved with the shell's palette (IrisWashi `apps`). Frost over the wallpaper
+     // changes with every window behind it; an app window is opaque, so it wears the paper the frost is held to.
+--- a/modules/iris/field/IrisField.qml	2026-10-11 20:51:46.054129774 +0200
++++ b/modules/iris/field/IrisField.qml	2026-11-01 20:11:47.577519415 +0100
+@@ -12,6 +12,7 @@
+ 
+     property var shapes: []
+     property color tint: IrisStyle.bodySurface
++    property real glassAmount: IrisStyle.glassTint // local patch (nico): per-field glass tint
+     property color rim: IrisStyle.rim
+     property real rimWidth: IrisStyle.rimWidth
+     property color sheen: IrisStyle.glassEdgeColour
+@@ -261,7 +262,7 @@
+         readonly property vector4d glassE: pass.glassBlock(4)
+         readonly property bool backdropReady: root.backdropSource?.ready ?? false
+         readonly property vector4d glass: Qt.vector4d(pass.backdropReady ? 1 : 0, root.framed ? root.frameGlass : 0,
+-            IrisStyle.glassTint, IrisStyle.glassLip)
++            root.glassAmount, IrisStyle.glassLip)
+         readonly property vector4d edgeWave: root.edgeWave
+         readonly property vector4d waveClock: Qt.vector4d(root.waveClock, 0, 0, 0)
+         readonly property vector4d frameLight: Qt.vector4d(root.frameMusicAppearance, root.frameMusicLevel,
+--- a/modules/iris/bar/IrisBar.qml	2026-10-11 20:51:46.053219728 +0200
++++ b/modules/iris/bar/IrisBar.qml	2026-11-01 20:28:26.710042867 +0100
+@@ -1017,6 +1017,11 @@
+                     anchors.fill: parent
+                     compositorAllowed: true
+                     providesBackdrop: true
++                    // Local patch (nico): iris.bar.glassColour / glassTint give the bar its own glass.
++                    readonly property string barGlassColour: String(Config.options?.iris?.bar?.glassColour ?? "")
++                    readonly property real barGlassTint: Number(Config.options?.iris?.bar?.glassTint ?? -1)
++                    tint: IrisStyle.glassy && barGlassColour.length > 0 ? Qt.color(barGlassColour) : IrisStyle.bodySurface
++                    glassAmount: IrisStyle.glassy && barGlassTint >= 0 ? Math.max(0, Math.min(0.96, barGlassTint / 100)) : IrisStyle.glassTint
+                     edgeWave: framePulse.amplitudes
+                     waveClock: framePulse.phase
+                     frameMusicLevel: framePulse.visibleLevel
+@@ -1069,6 +1074,7 @@
+                         targetScreen: barWindow.screen
+                         onPieceActivated: (slot, kind, rect) => stage.activate(slot, kind, rect)
+                         pointerHeld: islandInput.holding
++                        tucked: barWindow.islandTucked // local patch (nico)
+                         availableWidth: (windowLoader.loadedVertical ? barWindow.height : barWindow.width) - (IrisFrame.band + root.outerMargin) * 2
+                         availableAcross: barWindow.width - 2 * (IrisFrame.band + root.outerMargin) - root.barHeight - Math.round(24 * IrisStyle.density)
+                         compactHeight: root.barHeight
+--- a/modules/iris/bar/IrisIsland.qml	2026-10-11 20:51:46.053219728 +0200
++++ b/modules/iris/bar/IrisIsland.qml	2026-11-01 20:28:26.708769084 +0100
+@@ -780,6 +780,8 @@
+         || leftSatellite.hovered || rightSatellite.hovered || auxiliarySatellite.hovered
+     property point dwellAnchor: Qt.point(-1000, -1000)
+     property bool pointerHeld: false
++    // Local patch (nico): true while the bar is tucked off-screen, so the visualizer stops redrawing a hidden bar.
++    property bool tucked: false
+     onPointerHeldChanged: if (!root.pointerHeld && !root.pointerOnIsland && root.expanded && !root.pinned) leaveDelay.restart()
+ 
+     readonly property bool fullscreenCovered: CompositorService.isNiri
+@@ -1781,7 +1783,7 @@
+                     font.weight: IrisStyle.weight(Font.Medium)
+                 }
+                 IrisVisualizer {
+-                    running: root.playing && root.compactMode === "media" && !root.visualExpanded
++                    running: root.playing && root.compactMode === "media" && !root.visualExpanded && !root.tucked
+                     tint: IrisStyle.visualizerTint(root.artTint)
+                     barHeight: (root.zoned ? 18 : 15) * root.d
+                 }
+--- a/modules/iris/bar/island/IslandCompactColumn.qml	2026-10-04 00:54:50.194464641 +0200
++++ b/modules/iris/bar/island/IslandCompactColumn.qml	2026-11-01 20:28:26.709516487 +0100
+@@ -74,7 +74,7 @@
+         }
+         IrisVisualizer {
+             anchors.horizontalCenter: parent.horizontalCenter
+-            running: column.island.playing && column.mode === "media" && !column.island.visualExpanded
++            running: column.island.playing && column.mode === "media" && !column.island.visualExpanded && !column.island.tucked
+             tint: IrisStyle.visualizerTint(column.island.artTint)
+             barHeight: 13 * column.d
+         }

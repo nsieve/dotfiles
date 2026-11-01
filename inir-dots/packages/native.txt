@@ -10,6 +10,7 @@ bluez
 bluez-utils
 breeze-icons
 brightnessctl
+btop
 capitaine-cursors
 cava
 cliphist
@@ -175,6 +176,7 @@ ttf-roboto-mono
 unzip
 upower
 uv
+vulkan-intel
 wf-recorder
 wget
 wireplumber

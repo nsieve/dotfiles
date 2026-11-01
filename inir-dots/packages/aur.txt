@@ -5,6 +5,7 @@ helium-browser-bin
 inir-deps
 localsend-bin
 otf-space-grotesk
+pipes.sh
 qt6-avif-image-plugin
 spicetify-cli
 spotify
@@ -14,6 +15,7 @@ ttf-readex-pro
 ttf-roboto-flex
 ttf-rubik-vf
 ttf-twemoji
+unimatrix-git
 upscayl-bin
 vesktop
 wechat

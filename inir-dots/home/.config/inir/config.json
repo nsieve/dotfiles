@@ -150,7 +150,7 @@
             }
         },
         "cava": {
-            "background": "",
+            "background": "default",
             "barSpacing": 1,
             "barWidth": 2,
             "bars": 0,
@@ -329,7 +329,7 @@
             "colorStrength": 1,
             "colorsOnlyMode": false,
             "enableAppsAndShell": true,
-            "enableCava": false,
+            "enableCava": true,
             "enableChrome": true,
             "enableClaudeCode": false,
             "enableFirefox": true,
@@ -356,7 +356,7 @@
                 "forceDarkMode": false,
                 "harmonizeThreshold": 100,
                 "harmony": 0.6,
-                "termFgBoost": 0.35
+                "termFgBoost": 1
             },
             "terminals": {
                 "alacritty": true,
@@ -581,7 +581,7 @@
             "type": "random"
         },
         "videoPause": "covered",
-        "wallpaperPath": "/home/nico/Pictures/Wallpapers/wp_city.avif",
+        "wallpaperPath": "/home/nico/Pictures/Wallpapers/6ae01238-4828-4202-9563-6bd67c98c39f.png",
         "wallpapersByMonitor": [],
         "widgets": {
             "adaptColorsToWallpaperPosition": true,
@@ -1148,6 +1148,21 @@
                             "placementStrategy": "free",
                             "x": 120,
                             "y": 360
+                        },
+                        "notes": {
+                            "placementStrategy": "free",
+                            "x": 80,
+                            "y": 80
+                        },
+                        "systemMonitor": {
+                            "placementStrategy": "free",
+                            "x": 50,
+                            "y": 400
+                        },
+                        "todo": {
+                            "placementStrategy": "free",
+                            "x": 120,
+                            "y": 180
                         },
                         "visualizer": {
                             "placementStrategy": "free",
@@ -2177,10 +2192,11 @@
             "glass": {
                 "blur": 100,
                 "edgeColour": "scene",
-                "edgeLight": 60,
-                "edgeLine": 24,
+                "edgeLight": 0,
+                "edgeLine": 0,
                 "edgeWidth": 1.5,
-                "mode": "compositor",
+                "exactTint": true,
+                "mode": "wallpaper",
                 "tint": 16
             },
             "highlight": "wallpaper",
@@ -2195,7 +2211,7 @@
             "motion": true,
             "motionDuration": 220,
             "numbersFontFamily": "Roboto Flex",
-            "preset": "round",
+            "preset": "iris",
             "previews": true,
             "saved": [],
             "scheme": "auto",
@@ -2309,7 +2325,7 @@
                 "pieceShape": "square",
                 "placement": "auto",
                 "press": 100,
-                "rim": true,
+                "rim": false,
                 "rimTint": "neutral",
                 "rimWidth": 1,
                 "shadow": 110,
@@ -2376,12 +2392,15 @@
                 "tray",
                 "notifications",
                 "sound",
+                "battery",
                 "controls"
             ],
             "fullStart": [
                 "workspaces",
                 "window"
             ],
+            "glassColour": "#ffffff",
+            "glassTint": 25,
             "height": 44,
             "hoverDelay": 300,
             "hoverExpand": true,
@@ -2415,7 +2434,7 @@
             "piecesSide": "end",
             "position": "left",
             "reserveSpace": true,
-            "revealOnEmpty": true,
+            "revealOnEmpty": false,
             "rightModules": [],
             "satelliteGap": 8,
             "satelliteScale": 100,
@@ -2439,7 +2458,7 @@
                     "place": "right"
                 },
                 "battery": {
-                    "enable": true,
+                    "enable": false,
                     "fx": 0.5,
                     "fy": 0.5,
                     "place": "right"
@@ -2658,7 +2677,7 @@
             "position": "bottom",
             "reorder": true,
             "reserveSpace": true,
-            "revealOnEmpty": true,
+            "revealOnEmpty": false,
             "shape": "auto"
         },
         "lock": {
@@ -2857,7 +2876,7 @@
             }
         },
         "surround": {
-            "enable": true,
+            "enable": false,
             "music": "widget",
             "musicAppearance": "etched",
             "musicColour": "pearl",
