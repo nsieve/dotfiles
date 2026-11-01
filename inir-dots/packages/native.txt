@@ -1,6 +1,7 @@
 adw-gtk-theme
 adwaita-icon-theme
 anki
+avr-libc
 awww
 base
 base-devel
@@ -27,12 +28,14 @@ fcitx5-chinese-addons
 fcitx5-configtool
 fcitx5-gtk
 fcitx5-qt
+fd
 ffmpeg
 fish
 fontconfig
 fprintd
 frameworkintegration
 fuzzel
+fzf
 geoclue
 ghostscript
 git

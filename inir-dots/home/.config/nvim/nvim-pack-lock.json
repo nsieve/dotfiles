@@ -1,17 +1,9 @@
 {
   "plugins": {
-    "LuaSnip": {
-      "rev": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24",
-      "src": "https://github.com/L3MON4D3/LuaSnip"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
-    },
-    "efmls-configs-nvim": {
-      "rev": "f145a2e8212a195d44c1430e76cbc96efb0afb08",
-      "src": "https://github.com/creativenull/efmls-configs-nvim"
     },
     "fzf-lua": {
       "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
@@ -36,18 +28,6 @@
     "nvim-treesitter": {
       "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
-    },
-    "obsidian.nvim": {
-      "rev": "67848b7602bc40f5fdb2f58d0db4e399f0f58030",
-      "src": "https://github.com/obsidian-nvim/obsidian.nvim"
-    },
-    "rustaceanvim": {
-      "rev": "8e5a9c3eaff437b3f987b9abd9403dfed324529d",
-      "src": "https://github.com/mrcjkb/rustaceanvim"
-    },
-    "vim-tmux-navigator": {
-      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
-      "src": "https://github.com/christoomey/vim-tmux-navigator"
     }
   }
 }
