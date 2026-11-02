@@ -1,8 +1,14 @@
 # Local iRiS patches (apply to the runtime copy, then restart):
-#   patch -d ~/.config/quickshell/inir -p1 < ~/dotfiles/inir-dots/patches/iris-glass.patch && inir restart
+#   F=~/.config/quickshell/inir/modules/iris/field
+#   patch -d ~/.config/quickshell/inir -p1 < ~/dotfiles/inir-dots/patches/iris-glass.patch \
+#     && /usr/lib/qt6/bin/qsb --glsl "100 es,120,150" --hlsl 50 --msl 12 -o $F/IrisField.frag.qsb $F/IrisField.frag \
+#     && inir restart
 # - iris.appearance.glass.exactTint: keep the chosen glass tint (no automatic legibility floor).
 # - iris.bar.glassColour / iris.bar.glassTint: the bar's own glass colour and opacity ("" / -1 = follow the theme).
 # - The bar's music visualizer stops while the bar is tucked away (it kept the GPU busy while hidden).
+# - Field shader (IrisField.frag, recompiled to .qsb as above): same pixels, about 2.5x less GPU. Pixels nothing reaches
+#   return early, the shadow skips where it can't show, and no per-body tables (Mesa spilled them to scratch on the
+#   Intel UHD: Mod+Space's spotlight opened at ~16 fps). IrisField.qml passes the shape count in options.y.
 --- a/modules/common/Config.qml	2026-10-11 20:51:46.052129763 +0200
 +++ b/modules/common/Config.qml	2026-11-01 20:11:47.575851219 +0100
 @@ -4108,6 +4108,7 @@
@@ -47,7 +53,7 @@
      // What the apps wear: the paper itself, solved with the shell's palette (IrisWashi `apps`). Frost over the wallpaper
      // changes with every window behind it; an app window is opaque, so it wears the paper the frost is held to.
 --- a/modules/iris/field/IrisField.qml	2026-10-11 20:51:46.054129774 +0200
-+++ b/modules/iris/field/IrisField.qml	2026-11-01 20:11:47.577519415 +0100
++++ b/modules/iris/field/IrisField.qml	2026-11-02 22:02:43.135285761 +0100
 @@ -12,6 +12,7 @@
  
      property var shapes: []
@@ -56,7 +62,17 @@
      property color rim: IrisStyle.rim
      property real rimWidth: IrisStyle.rimWidth
      property color sheen: IrisStyle.glassEdgeColour
-@@ -261,7 +262,7 @@
+@@ -193,7 +194,8 @@
+         readonly property vector4d field: Qt.vector4d(root.smoothing, root.framed ? 1 : 0,
+             root.band, root.cornerRadius)
+         readonly property color tint: root.tint
+-        readonly property vector4d options: Qt.vector4d(0, 0, 0, 0)
++        // Local patch (nico): y is how many shapes are set, so the shader's loops stop there (IrisField.frag `count`).
++        readonly property vector4d options: Qt.vector4d(0, Math.min((root.shapes ?? []).length, root.capacity), 0, 0)
+         readonly property vector4d quiet: root.quietRect
+         readonly property color rim: root.rim
+         readonly property color sheen: root.sheen
+@@ -261,7 +263,7 @@
          readonly property vector4d glassE: pass.glassBlock(4)
          readonly property bool backdropReady: root.backdropSource?.ready ?? false
          readonly property vector4d glass: Qt.vector4d(pass.backdropReady ? 1 : 0, root.framed ? root.frameGlass : 0,
@@ -65,6 +81,287 @@
          readonly property vector4d edgeWave: root.edgeWave
          readonly property vector4d waveClock: Qt.vector4d(root.waveClock, 0, 0, 0)
          readonly property vector4d frameLight: Qt.vector4d(root.frameMusicAppearance, root.frameMusicLevel,
+--- a/modules/iris/field/IrisField.frag	2026-10-11 20:51:46.053219728 +0200
++++ b/modules/iris/field/IrisField.frag	2026-11-02 22:02:43.001507909 +0100
+@@ -175,6 +175,29 @@
+     return fract(52.9829189 * fract(dot(p, vec2(0.06711056, 0.00583715))));
+ }
+ 
++// Local patch (nico): a body's distance, worked out where it is needed instead of kept in per-body tables. Mesa's
++// Intel compiler put those tables (indexed by the uniforms' joins) in scratch memory: 153 spills and 350 fills, SIMD8
++// only, 10-15 ms a frame for a spotlight on an i7-11800H's UHD graphics. `minRadius` is the normals' bevel; -FAR
++// leaves the body's own radius as it is.
++float bodyAt(vec2 q, int i, float minRadius) {
++    vec4 s = shapeAt(i);
++    if (s.z <= 0.0 || s.w <= 0.0)
++        return FAR * 10.0;
++    int block = i / 4;
++    int slot = i - block * 4;
++    float radius = blockValue(block, slot, u.radiiA, u.radiiB, u.radiiC, u.radiiD, u.radiiE);
++    return roundedBox(q, s.xy, s.zw, max(radius, minRadius));
++}
++
++// A body's shadow caster: none for a body that paints itself (it brings its own).
++float casterAt(vec2 q, int i) {
++    int block = i / 4;
++    int slot = i - block * 4;
++    if (blockValue(block, slot, u.paintsA, u.paintsB, u.paintsC, u.paintsD, u.paintsE) > 0.5)
++        return FAR * 10.0;
++    return bodyAt(q, i, -FAR);
++}
++
+ void main() {
+     vec2 p = u.viewport.xy + qt_TexCoord0 * max(u.viewport.zw, vec2(1.0));
+     if (p.x > u.quiet.x && p.y > u.quiet.y && p.x < u.quiet.z && p.y < u.quiet.w) {
+@@ -182,6 +205,9 @@
+         return;
+     }
+     float united = FAR * 10.0;
++    // Local patch (nico): how many shapes the QML side set (options.y); the loops stop there instead of walking all
++    // twenty slots. 0, from an IrisField.qml without the patch, keeps the twenty.
++    int count = u.options.y > 0.5 ? int(min(u.options.y, 20.0) + 0.5) : 20;
+ 
+     // The frame is the complement of the screen's inner rounded rectangle: every
+     // pixel outside it is material, so the band and its concentric inner corners
+@@ -216,25 +242,52 @@
+         float w = exp(-clamp(frameDistance, -40.0, 40.0) / 2.0);
+         weights += w * vec3(u.glass.y < 0.5 ? 1.0 : 0.0, u.glass.y > 0.5 && u.glass.y < 1.5 ? 1.0 : 0.0, u.glass.y > 1.5 ? 1.0 : 0.0);
+     }
+-    float bodies[20];
++    // Local patch (nico): the distances first, then a pixel nothing can reach leaves before the joins, materials and
++    // shadow are worked out for it. A smooth union lies at most a quarter of its depth below the nearer of the two, a
++    // shadow is gone five blurs past its fall and the afterglow's halo seven bloom radii out, so such a pixel drew
++    // (0, 0, 0, 0) anyway. The 4 px floor keeps every pixel with coverage out of a quad that returned here: the
++    // derivatives below are undefined there.
++    float nearest = FAR * 10.0;
++    float deepest = 0.0;
++    for (int i = 0; i < 20; ++i) {
++        if (i >= count)
++            break;
++        float body = bodyAt(p, i, -FAR);
++        if (body > FAR)
++            continue;
++        int block = i / 4;
++        int slot = i - block * 4;
++        nearest = min(nearest, body);
++        deepest = max(deepest, blockValue(block, slot, u.fuseA, u.fuseB, u.fuseC, u.fuseD, u.fuseE));
++    }
++    float lowest = min(nearest, frameDistance) - 0.25 * deepest;
++    float shadowReach = abs(u.shadeShape.x) + 5.0 * max(1.0, u.shadeShape.y * 0.5);
++    float reach = 4.0;
++    if (u.shadeShape.z > 0.5 && u.shade.a > 0.0)
++        reach = max(reach, shadowReach);
++    if (u.glowMix.x > 0.5)
++        reach = max(reach, 7.0 * max(1.0, u.glowBloom.a));
++    if (lowest > reach) {
++        fragColor = vec4(0.0);
++        return;
++    }
+     // What the compositor's blur region holds (IrisBlurRegion): the compositor-glass bodies and their joins with
+     // each other; the band and its joins only while the frame is compositor glass too.
+     float held = FAR * 10.0;
+     for (int i = 0; i < 20; ++i) {
+-        vec4 s = shapeAt(i);
+-        bodies[i] = FAR * 10.0;
+-        if (s.z <= 0.0 || s.w <= 0.0)
++        if (i >= count)
++            break;
++        float body = bodyAt(p, i, -FAR);
++        if (body > FAR)
+             continue;
+         int block = i / 4;
+         int slot = i - block * 4;
+-        float radius = blockValue(block, slot, u.radiiA, u.radiiB, u.radiiC, u.radiiD, u.radiiE);
+-        bodies[i] = roundedBox(p, s.xy, s.zw, radius);
+-        united = min(united, bodies[i]);
++        united = min(united, body);
+         float m = blockValue(block, slot, u.glassA, u.glassB, u.glassC, u.glassD, u.glassE);
+         if (m > 1.5)
+-            held = min(held, bodies[i]);
++            held = min(held, body);
+         if (anyGlass) {
+-            float w = exp(-clamp(bodies[i], -40.0, 40.0) / 2.0);
++            float w = exp(-clamp(body, -40.0, 40.0) / 2.0);
+             weights += w * vec3(m < 0.5 ? 1.0 : 0.0, m > 0.5 && m < 1.5 ? 1.0 : 0.0, m > 1.5 ? 1.0 : 0.0);
+         }
+     }
+@@ -242,7 +295,10 @@
+     // union is never above the plain one, so taking the minimum adds the fillet
+     // there and nowhere else.
+     for (int i = 0; i < 20; ++i) {
+-        if (bodies[i] > FAR)
++        if (i >= count)
++            break;
++        float body = bodyAt(p, i, -FAR);
++        if (body > FAR)
+             continue;
+         int block = i / 4;
+         int slot = i - block * 4;
+@@ -252,9 +308,9 @@
+         bool blurred = blockValue(block, slot, u.glassA, u.glassB, u.glassC, u.glassD, u.glassE) > 1.5;
+         if (join < -0.5 || join > 0.5) {
+             int j = int(join + 0.5) - 1;
+-            float other = join < 0.0 ? frameDistance : bodies[j];
++            float other = join < 0.0 ? frameDistance : bodyAt(p, j, -FAR);
+             if (other < FAR) {
+-                float fused = smoothUnion(other, bodies[i], k);
++                float fused = smoothUnion(other, body, k);
+                 united = min(united, fused);
+                 if (join < 0.0)
+                     frameClusterDistance = min(frameClusterDistance, fused);
+@@ -264,9 +320,9 @@
+         }
+         if (also < -0.5 || also > 0.5) {
+             int j = int(also + 0.5) - 1;
+-            float other = also < 0.0 ? frameDistance : bodies[j];
++            float other = also < 0.0 ? frameDistance : bodyAt(p, j, -FAR);
+             if (other < FAR) {
+-                float fused = smoothUnion(other, bodies[i], k);
++                float fused = smoothUnion(other, body, k);
+                 united = min(united, fused);
+                 if (also < 0.0)
+                     frameClusterDistance = min(frameClusterDistance, fused);
+@@ -329,15 +385,18 @@
+             weightSum += w;
+         }
+         for (int i = 0; i < 20; ++i) {
+-            if (bodies[i] > FAR)
++            if (i >= count)
++                break;
++            float body = bodyAt(p, i, -FAR);
++            if (body > FAR)
+                 continue;
+             vec4 s = shapeAt(i);
+-            float w = exp(-clamp(bodies[i] - united, 0.0, 60.0) / 12.0);
++            float w = exp(-clamp(body - united, 0.0, 60.0) / 12.0);
+             vec2 t = clamp((p - s.xy + s.zw) / max(2.0 * s.zw, vec2(1.0)), 0.0, 1.0);
+             gouraudSum += w * mix(mix(1.0, 0.82, t.x), mix(0.34, 0.22, t.x), t.y);
+             weightSum += w;
+-            if (bodies[i] < nearest) {
+-                nearest = bodies[i];
++            if (body < nearest) {
++                nearest = body;
+                 nearestHalf = min(s.z, s.w);
+             }
+         }
+@@ -358,20 +417,19 @@
+                     frameQ = -roundedBox(q + u.scene.xy, frameCentre, frameHalf, max(u.field.w, bevel));
+                     unitedQ = frameQ;
+                 }
+-                float bodiesQ[20];
+                 for (int i = 0; i < 20; ++i) {
+-                    bodiesQ[i] = FAR * 10.0;
+-                    if (bodies[i] > FAR)
++                    if (i >= count)
++                        break;
++                    float bodyQ = bodyAt(q, i, bevel);
++                    if (bodyQ > FAR)
+                         continue;
+-                    vec4 s = shapeAt(i);
+-                    int block = i / 4;
+-                    int slot = i - block * 4;
+-                    float radius = blockValue(block, slot, u.radiiA, u.radiiB, u.radiiC, u.radiiD, u.radiiE);
+-                    bodiesQ[i] = roundedBox(q, s.xy, s.zw, max(radius, bevel));
+-                    unitedQ = min(unitedQ, bodiesQ[i]);
++                    unitedQ = min(unitedQ, bodyQ);
+                 }
+                 for (int i = 0; i < 20; ++i) {
+-                    if (bodiesQ[i] > FAR)
++                    if (i >= count)
++                        break;
++                    float bodyQ = bodyAt(q, i, bevel);
++                    if (bodyQ > FAR)
+                         continue;
+                     int block = i / 4;
+                     int slot = i - block * 4;
+@@ -379,14 +437,14 @@
+                     float join = blockValue(block, slot, u.joinA, u.joinB, u.joinC, u.joinD, u.joinE);
+                     float also = blockValue(block, slot, u.alsoA, u.alsoB, u.alsoC, u.alsoD, u.alsoE);
+                     if (join < -0.5 || join > 0.5) {
+-                        float other = join < 0.0 ? frameQ : bodiesQ[int(join + 0.5) - 1];
++                        float other = join < 0.0 ? frameQ : bodyAt(q, int(join + 0.5) - 1, bevel);
+                         if (other < FAR)
+-                            unitedQ = min(unitedQ, smoothUnion(other, bodiesQ[i], kq));
++                            unitedQ = min(unitedQ, smoothUnion(other, bodyQ, kq));
+                     }
+                     if (also < -0.5 || also > 0.5) {
+-                        float other = also < 0.0 ? frameQ : bodiesQ[int(also + 0.5) - 1];
++                        float other = also < 0.0 ? frameQ : bodyAt(q, int(also + 0.5) - 1, bevel);
+                         if (other < FAR)
+-                            unitedQ = min(unitedQ, smoothUnion(other, bodiesQ[i], kq));
++                            unitedQ = min(unitedQ, smoothUnion(other, bodyQ, kq));
+                     }
+                 }
+                 grad += o * unitedQ * 0.5;
+@@ -481,7 +539,10 @@
+         alpha = lightAlpha + alpha * (1.0 - lightAlpha);
+     }
+     float shadowAlpha = 0.0;
+-    if (u.shadeShape.z > 0.5 && u.shade.a > 0.0) {
++    // Local patch (nico): no shadow is worked out where none would show: under glass or an opaque body (the room it
++    // is multiplied by below is zero there) or past its reach.
++    float shadowRoom = u.qt_Opacity * (1.0 - coverage * (share.y + share.z)) * (1.0 - alpha);
++    if (u.shadeShape.z > 0.5 && u.shade.a > 0.0 && abs(shadowRoom) > 1e-5 && lowest <= shadowReach) {
+         // The casters' silhouette one offset lower: bodies that do not paint themselves, the joins between them, and
+         // for a body grown out of the frame its fillet with the band less the band's own share, so the shoulders cast
+         // and the band does not.
+@@ -491,21 +552,19 @@
+             frameShade = -roundedBox(ps + u.scene.xy, frameCentre, frameHalf, u.field.w);
+         float alone = FAR * 10.0;
+         float withFrame = FAR * 10.0;
+-        float casters[20];
+         for (int i = 0; i < 20; ++i) {
+-            casters[i] = FAR * 10.0;
+-            if (bodies[i] > FAR)
+-                continue;
+-            int block = i / 4;
+-            int slot = i - block * 4;
+-            if (blockValue(block, slot, u.paintsA, u.paintsB, u.paintsC, u.paintsD, u.paintsE) > 0.5)
++            if (i >= count)
++                break;
++            float caster = casterAt(ps, i);
++            if (caster > FAR)
+                 continue;
+-            vec4 s = shapeAt(i);
+-            casters[i] = roundedBox(ps, s.xy, s.zw, blockValue(block, slot, u.radiiA, u.radiiB, u.radiiC, u.radiiD, u.radiiE));
+-            alone = min(alone, casters[i]);
++            alone = min(alone, caster);
+         }
+         for (int i = 0; i < 20; ++i) {
+-            if (casters[i] > FAR)
++            if (i >= count)
++                break;
++            float caster = casterAt(ps, i);
++            if (caster > FAR)
+                 continue;
+             int block = i / 4;
+             int slot = i - block * 4;
+@@ -513,13 +572,19 @@
+             float join = blockValue(block, slot, u.joinA, u.joinB, u.joinC, u.joinD, u.joinE);
+             float also = blockValue(block, slot, u.alsoA, u.alsoB, u.alsoC, u.alsoD, u.alsoE);
+             if (join < -0.5 && frameShade < FAR)
+-                withFrame = min(withFrame, smoothUnion(frameShade, casters[i], k));
+-            else if (join > 0.5 && casters[int(join + 0.5) - 1] < FAR)
+-                alone = min(alone, smoothUnion(casters[int(join + 0.5) - 1], casters[i], k));
++                withFrame = min(withFrame, smoothUnion(frameShade, caster, k));
++            else if (join > 0.5) {
++                float other = casterAt(ps, int(join + 0.5) - 1);
++                if (other < FAR)
++                    alone = min(alone, smoothUnion(other, caster, k));
++            }
+             if (also < -0.5 && frameShade < FAR)
+-                withFrame = min(withFrame, smoothUnion(frameShade, casters[i], k));
+-            else if (also > 0.5 && casters[int(also + 0.5) - 1] < FAR)
+-                alone = min(alone, smoothUnion(casters[int(also + 0.5) - 1], casters[i], k));
++                withFrame = min(withFrame, smoothUnion(frameShade, caster, k));
++            else if (also > 0.5) {
++                float other = casterAt(ps, int(also + 0.5) - 1);
++                if (other < FAR)
++                    alone = min(alone, smoothUnion(other, caster, k));
++            }
+         }
+         float sigma = max(1.0, u.shadeShape.y * 0.5);
+         float thrown = alone < FAR ? blurredEdge(alone / sigma) : 0.0;
 --- a/modules/iris/bar/IrisBar.qml	2026-10-11 20:51:46.053219728 +0200
 +++ b/modules/iris/bar/IrisBar.qml	2026-11-01 20:28:26.710042867 +0100
 @@ -1017,6 +1017,11 @@
