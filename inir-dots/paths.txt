@@ -28,6 +28,8 @@
 # ── Input method (Spanish + Pinyin) ─────────────────────────
 .config/fcitx5/profile
 .config/fcitx5/conf/
+.config/helium-browser-flags.conf
+.config/autostart/org.fcitx.Fcitx5.desktop
 
 # ── Toolkit theming / default apps ──────────────────────────
 .config/gtk-3.0/settings.ini

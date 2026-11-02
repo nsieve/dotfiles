@@ -1,0 +1,8 @@
+# Disables the fcitx5 package's XDG autostart. niri already starts fcitx5
+# (config.d/90-user-extra.kdl), and two instances racing at login leave the
+# survivor without niri's input-method slot, so no app gets Chinese input.
+[Desktop Entry]
+Type=Application
+Name=Fcitx 5
+Exec=/usr/bin/fcitx5
+Hidden=true
