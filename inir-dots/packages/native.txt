@@ -23,6 +23,7 @@ discord
 easyeffects
 efibootmgr
 eza
+fastfetch
 fcitx5
 fcitx5-chinese-addons
 fcitx5-configtool
@@ -97,6 +98,7 @@ plasma-browser-integration
 plasma-integration
 playerctl
 polkit-gnome
+power-profiles-daemon
 python-dbus
 python-evdev
 python-pillow
@@ -119,6 +121,7 @@ qt6ct
 quickshell
 ripgrep
 rsync
+rtkit
 sane
 sane-airscan
 sddm

@@ -29,6 +29,7 @@
 .config/fcitx5/profile
 .config/fcitx5/conf/
 .config/helium-browser-flags.conf
+.config/spotify-flags.conf
 .config/autostart/org.fcitx.Fcitx5.desktop
 
 # ── Toolkit theming / default apps ──────────────────────────

@@ -1,0 +1,66 @@
+# Local iRiS patch for iNiR 3.x (the iRiS Hub plugin). `inir update` overwrites the plugin, so reapply after updates:
+#   patch -d ~/.local/share/inir/plugins/iris -p1 < ~/dotfiles/inir-dots/patches/iris-visualizer.patch && inir restart
+# The bar's music visualizer stops while the bar is tucked away. Without it, cava kept running and niri sat at ~62% GPU
+# while music played with the bar hidden (0.8% with the patch, measured 2026-11-10 on iRiS 2.33.65).
+diff -ru a/bar/IrisBar.qml b/bar/IrisBar.qml
+--- a/bar/IrisBar.qml
++++ b/bar/IrisBar.qml
+@@ -1375,6 +1375,7 @@
+                         targetScreen: barWindow.screen
+                         onPieceActivated: (slot, kind, rect) => stage.activate(slot, kind, rect)
+                         pointerHeld: islandInput.holding
++                        tucked: barWindow.islandTucked // local patch (nico)
+                         availableWidth: (windowLoader.loadedVertical ? barWindow.height : barWindow.width) - (IrisFrame.band + root.outerMargin) * 2
+                         availableAcross: barWindow.width - 2 * (IrisFrame.band + root.outerMargin) - root.barHeight - Math.round(24 * IrisStyle.density)
+                         compactHeight: root.barHeight
+diff -ru a/bar/IrisIsland.qml b/bar/IrisIsland.qml
+--- a/bar/IrisIsland.qml
++++ b/bar/IrisIsland.qml
+@@ -45,6 +45,8 @@
+     Behavior on spotlightYield { NumberAnimation { duration: IrisStyle.duration(160); easing.type: IrisStyle.feedbackEasing } }
+     property bool expanded: false
+     property bool pinned: false
++    // Local patch (nico): true while the bar is tucked off-screen, so the visualizer stops redrawing a hidden bar.
++    property bool tucked: false
+     property string page: ""
+ 
+     readonly property real d: IrisStyle.density
+@@ -2221,7 +2223,7 @@
+                 IrisVisualizer {
+                     visible: !root.nothingLook && RecorderStatus.effectiveAudioMode !== "none"
+                     Layout.alignment: Qt.AlignVCenter
+-                    running: visible && root.compactMode === "record" && !root.visualExpanded
++                    running: visible && root.compactMode === "record" && !root.visualExpanded && !root.tucked
+                     tint: IrisStyle.danger
+                     barHeight: 14 * root.d
+                 }
+@@ -2409,7 +2411,7 @@
+                 }
+                 IrisVisualizer {
+                     Layout.alignment: Qt.AlignVCenter
+-                    running: visible && root.compactMode === "mic" && !root.visualExpanded
++                    running: visible && root.compactMode === "mic" && !root.visualExpanded && !root.tucked
+                     tint: IrisStyle.identity.green
+                     barHeight: 15 * root.d
+                 }
+@@ -2823,7 +2825,7 @@
+                     id: wingVisualizer
+                     anchors.centerIn: parent
+                     visible: !root.nothingLook
+-                    running: wingTrail.visible && visible && root.playing && !root.visualExpanded
++                    running: wingTrail.visible && visible && root.playing && !root.visualExpanded && !root.tucked
+                     tint: IrisStyle.visualizerTint(root.artTint)
+                     barHeight: Math.round(root.compactHeight * 0.4)
+                 }
+diff -ru a/bar/island/IslandCompactColumn.qml b/bar/island/IslandCompactColumn.qml
+--- a/bar/island/IslandCompactColumn.qml
++++ b/bar/island/IslandCompactColumn.qml
+@@ -76,7 +76,7 @@
+         IrisVisualizer {
+             visible: !column.island.nothingLook
+             anchors.horizontalCenter: parent.horizontalCenter
+-            running: visible && column.island.playing && column.mode === "media" && !column.island.visualExpanded
++            running: visible && column.island.playing && column.mode === "media" && !column.island.visualExpanded && !column.island.tucked
+             tint: IrisStyle.visualizerTint(column.island.artTint)
+             barHeight: 13 * column.d
+         }

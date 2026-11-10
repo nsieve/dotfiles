@@ -1,3 +1,5 @@
+# iNiR 2.33 ONLY. Does not apply to 3.x (iRiS moved into a Hub plugin, the shader was rewritten). Kept for reference;
+# on 3.x the stock look is kept on purpose and only iris-visualizer.patch is reapplied.
 # Local iRiS patches (apply to the runtime copy, then restart):
 #   F=~/.config/quickshell/inir/modules/iris/field
 #   patch -d ~/.config/quickshell/inir -p1 < ~/dotfiles/inir-dots/patches/iris-glass.patch \

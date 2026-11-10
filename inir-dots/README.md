@@ -58,7 +58,24 @@ Notes:
   ```
   Tint and rim strength: `TINT` / `RIM` at the top of `~/.config/spicetify/Extensions/inirGlass.js`
   (then `spicetify apply`). Blur: `BLUR` in `~/.config/spicetify/inir-glass/update.sh`.
+- **Spotify runs as a native Wayland app** (`~/.config/spotify-flags.conf`: `--enable-features=UseOzonePlatform`
+  and `--ozone-platform=wayland`, next to iNiR's `--remote-debugging-port=8976`). Under XWayland on the 1.25-scaled
+  laptop screen, xwayland-satellite reports a 2x scale, so Spotify doubled its minimum window size to 1600x1200 px
+  (taller than the screen) and the bottom of the window was cut off. iNiR only appends its own flag to this file,
+  so updates keep these lines. The fake glass works the same on Wayland.
 - Keep iNiR on a similar version on both machines. iNiR migrates older `config.json` files forward, but not backward.
+
+## After every `inir update`
+
+1. Reapply the iRiS visualizer patch (the update overwrites the plugin), then restart the shell:
+   ```
+   patch -d ~/.local/share/inir/plugins/iris -p1 < ~/dotfiles/inir-dots/patches/iris-visualizer.patch && inir restart
+   ```
+   Without it the bar's visualizer keeps running while the bar is hidden (~60% GPU for niri while music plays).
+   If a hunk fails, the plugin changed: port the `tucked` guard by hand (see the patch header).
+2. Check `~/.config/spotify-flags.conf` still has the two Wayland lines above.
+3. `patches/iris-glass-2.33.patch` is for iNiR 2.33 only. On 3.x the stock iRiS look is kept on purpose.
+4. Run `./sync.sh` and commit.
 
 ## Where to put niri customizations
 

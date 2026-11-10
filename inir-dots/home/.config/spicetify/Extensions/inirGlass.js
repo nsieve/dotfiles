@@ -21,6 +21,10 @@ html body .Root__top-container, html body .Root__top-container * {
   --background-elevated-highlight: rgba(255, 255, 255, 0.10) !important;
 }
 html body .Root__globalNav { background: transparent !important; }
+/* iNiR's Spotify theme sets the grid gap to 0 and drops the player's top padding, but Spotify pulls
+   the player up with a negative margin, so it covered the panels' bottoms. Restore Spotify's spacing. */
+html body .Root__top-container { gap: var(--panel-gap, 8px) !important; }
+html body .Root__now-playing-bar { padding: var(--panel-gap, 8px) !important; }
 /* The four panels: tinted glass with a light rim. */
 html body .Root__nav-bar,
 html body .Root__main-view,
