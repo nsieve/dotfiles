@@ -17,6 +17,7 @@
 
 # ── Terminal / shell / launcher ─────────────────────────────
 .config/kitty/kitty.conf
+.config/kitty/rice.conf
 .config/foot/foot.ini
 .config/fish/config.fish
 .config/fish/conf.d/rice.fish
@@ -44,6 +45,10 @@
 .config/spicetify/inir-glass/
 .config/systemd/user/inir-spotify-glass.service
 .config/systemd/user/inir-spotify-glass.path
+
+# ── Looks (rice: switch wallpaper+shell+terminal+nvim in one go) ──
+.config/rice/
+.local/bin/rice
 
 # ── Wallpapers ──────────────────────────────────────────────
 Pictures/Wallpapers/

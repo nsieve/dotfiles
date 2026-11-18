@@ -1,0 +1,944 @@
+{
+    "inirLook": 1,
+    "name": "default",
+    "made": "2026-11-18T17:50:02+01:00",
+    "family": "iris",
+    "design": "iris",
+    "wallpaper": {
+        "path": "/home/nico/Pictures/Wallpapers/6ae01238-4828-4202-9563-6bd67c98c39f.png"
+    },
+    "config": {
+        "appearance": {
+            "cava": {
+                "background": "default"
+            },
+            "customTheme": {
+                "darkmode": true,
+                "m3background": "#282828",
+                "m3error": "#fb4934",
+                "m3errorContainer": "#cc241d",
+                "m3inverseOnSurface": "#282828",
+                "m3inversePrimary": "#d65d0e",
+                "m3inverseSurface": "#ebdbb2",
+                "m3onBackground": "#ebdbb2",
+                "m3onError": "#1d2021",
+                "m3onErrorContainer": "#fbd5a8",
+                "m3onPrimary": "#1d2021",
+                "m3onPrimaryContainer": "#fbd5a8",
+                "m3onPrimaryFixed": "#1d2021",
+                "m3onPrimaryFixedVariant": "#3c3836",
+                "m3onSecondary": "#1d2021",
+                "m3onSecondaryContainer": "#d5c4a1",
+                "m3onSecondaryFixed": "#1d2021",
+                "m3onSecondaryFixedVariant": "#3c3836",
+                "m3onSuccess": "#1d2021",
+                "m3onSuccessContainer": "#d5c4a1",
+                "m3onSurface": "#ebdbb2",
+                "m3onSurfaceVariant": "#d5c4a1",
+                "m3onTertiary": "#1d2021",
+                "m3onTertiaryContainer": "#d5c4a1",
+                "m3onTertiaryFixed": "#1d2021",
+                "m3onTertiaryFixedVariant": "#3c3836",
+                "m3outline": "#928374",
+                "m3outlineVariant": "#665c54",
+                "m3primary": "#fe8019",
+                "m3primaryContainer": "#af3a03",
+                "m3primaryFixed": "#fabd2f",
+                "m3primaryFixedDim": "#d79921",
+                "m3scrim": "#000000",
+                "m3secondary": "#b8bb26",
+                "m3secondaryContainer": "#79740e",
+                "m3secondaryFixed": "#b8bb26",
+                "m3secondaryFixedDim": "#98971a",
+                "m3shadow": "#000000",
+                "m3success": "#b8bb26",
+                "m3successContainer": "#79740e",
+                "m3surface": "#282828",
+                "m3surfaceBright": "#3c3836",
+                "m3surfaceContainer": "#32302f",
+                "m3surfaceContainerHigh": "#3c3836",
+                "m3surfaceContainerHighest": "#504945",
+                "m3surfaceContainerLow": "#282828",
+                "m3surfaceContainerLowest": "#1d2021",
+                "m3surfaceDim": "#1d2021",
+                "m3surfaceTint": "#fe8019",
+                "m3surfaceVariant": "#504945",
+                "m3tertiary": "#83a598",
+                "m3tertiaryContainer": "#427b58",
+                "m3tertiaryFixed": "#8ec07c",
+                "m3tertiaryFixedDim": "#689d6a"
+            },
+            "theme": "auto",
+            "typography": {
+                "mainFont": "Roboto Flex"
+            },
+            "wallpaperTheming": {
+                "enableSteam": false,
+                "terminalGenerationProps": {
+                    "termFgBoost": 1
+                }
+            }
+        },
+        "background": {
+            "backdrop": {
+                "fillMode": "fill"
+            },
+            "effects": {
+                "dynamicDim": 5,
+                "enableBlur": false
+            },
+            "fillMode": "fill",
+            "parallax": {
+                "enable": true
+            },
+            "widgets": {
+                "battery": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "calendarUpcoming": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "clock": {
+                    "enable": false,
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "pixel": {
+                        "orientation": "horizontal"
+                    },
+                    "showBackground": true,
+                    "sizeClass": "small"
+                },
+                "controls": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "sizeClass": ""
+                },
+                "customImage": {
+                    "dim": 0,
+                    "enable": false,
+                    "fitMode": "cover",
+                    "folder": "",
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "intervalSeconds": 30,
+                    "locked": false,
+                    "mediaFilter": "all",
+                    "order": "sequential",
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "shape": "Cookie4Sided",
+                    "sizeClass": "",
+                    "sourceMode": "file",
+                    "transitionDuration": 450,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 120,
+                    "y": 320
+                },
+                "dateBadge": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "dayProgress": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "sizeClass": ""
+                },
+                "dynamicOpacity": 0,
+                "editorial": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "sizeClass": ""
+                },
+                "imageConverter": {
+                    "backgroundOpacity": 0.22,
+                    "borderOpacity": 0.22,
+                    "borderWidth": 1,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 260,
+                    "freeWidth": 292,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "selectedFormat": "webp",
+                    "showBackground": true,
+                    "showBorder": true,
+                    "sizeClass": "",
+                    "useBlur": false,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 120,
+                    "y": 360
+                },
+                "japaneseTypography": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "sizeClass": ""
+                },
+                "lyrics": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "sizeClass": ""
+                },
+                "mascot": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "sizeClass": ""
+                },
+                "mediaControls": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "locked": false,
+                    "lyricsExpanded": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "monthCalendar": {
+                    "backgroundOpacity": 0.14,
+                    "borderOpacity": 0.16,
+                    "borderWidth": 1,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 340,
+                    "freeWidth": 300,
+                    "instrumentRule": true,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "showAdjacentDays": true,
+                    "showBackground": true,
+                    "showBorder": true,
+                    "sizeClass": "medium",
+                    "style": "card",
+                    "useBlur": false,
+                    "weekStart": 1,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 420,
+                    "y": 120
+                },
+                "newsTicker": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "notes": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "outputOverrides": [
+                    {
+                        "height": 1080,
+                        "layoutVersion": 1,
+                        "output": "eDP-1",
+                        "widgets": {
+                            "customImage": {
+                                "placementStrategy": "free",
+                                "x": 120,
+                                "y": 320
+                            },
+                            "imageConverter": {
+                                "placementStrategy": "free",
+                                "x": 120,
+                                "y": 360
+                            },
+                            "notes": {
+                                "placementStrategy": "free",
+                                "x": 80,
+                                "y": 80
+                            },
+                            "systemMonitor": {
+                                "placementStrategy": "free",
+                                "x": 50,
+                                "y": 400
+                            },
+                            "todo": {
+                                "placementStrategy": "free",
+                                "x": 120,
+                                "y": 180
+                            },
+                            "visualizer": {
+                                "placementStrategy": "free",
+                                "x": 100,
+                                "y": 100
+                            },
+                            "weather": {
+                                "placementStrategy": "free",
+                                "x": 100,
+                                "y": 200
+                            }
+                        },
+                        "width": 1920
+                    }
+                ],
+                "palette": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "sizeClass": ""
+                },
+                "screenTime": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "sizeClass": ""
+                },
+                "shape": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "sizeClass": ""
+                },
+                "systemMonitor": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "timers": {
+                    "backgroundOpacity": 0,
+                    "borderOpacity": 0.16,
+                    "borderWidth": 0,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "glow": true,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "showBackground": true,
+                    "showBorder": false,
+                    "showHundredths": true,
+                    "showProgress": true,
+                    "showState": true,
+                    "sizeClass": "",
+                    "style": "cards",
+                    "useBlur": false,
+                    "vertical": false,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 360,
+                    "y": 420
+                },
+                "todo": {
+                    "backgroundOpacity": 0.14,
+                    "borderOpacity": 0.16,
+                    "borderWidth": 1,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 276,
+                    "freeWidth": 300,
+                    "instrumentRules": true,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "showBackground": true,
+                    "showBorder": true,
+                    "showCompleted": true,
+                    "sizeClass": "medium",
+                    "style": "card",
+                    "useBlur": false,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 120,
+                    "y": 180
+                },
+                "uptime": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "userCard": {
+                    "backgroundOpacity": 0.16,
+                    "borderOpacity": 0.2,
+                    "borderWidth": 1,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 176,
+                    "freeWidth": 280,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "showAvatar": true,
+                    "showBackground": true,
+                    "showBorder": true,
+                    "showHostname": true,
+                    "showWeather": true,
+                    "sizeClass": "",
+                    "style": "card",
+                    "useBlur": false,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 80,
+                    "y": 420
+                },
+                "visualizer": {
+                    "backgroundOpacity": 0.16,
+                    "edgeInset": 0,
+                    "edgeSoftness": 28,
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "lineWidth": 2,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "showBackground": true,
+                    "showBorder": true,
+                    "sizeClass": ""
+                },
+                "weather": {
+                    "freeHeight": 0,
+                    "freeWidth": 0,
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "sizeClass": ""
+                },
+                "worldClock": {
+                    "backgroundOpacity": 0.16,
+                    "borderOpacity": 0.2,
+                    "borderWidth": 1,
+                    "colorMode": "auto",
+                    "cornerRadius": -1,
+                    "dim": 0,
+                    "enable": false,
+                    "freeHeight": 210,
+                    "freeWidth": 300,
+                    "instrumentLayout": "grid",
+                    "locked": false,
+                    "palette": {
+                        "primary": "primary",
+                        "secondary": "secondary",
+                        "signal": "signal",
+                        "surface": "surface",
+                        "tertiary": "tertiary"
+                    },
+                    "placementStrategy": "free",
+                    "pulseSeparator": false,
+                    "showBackground": true,
+                    "showBorder": true,
+                    "showDate": true,
+                    "showDayState": true,
+                    "showNames": true,
+                    "showOffsets": true,
+                    "sizeClass": "",
+                    "style": "cards",
+                    "timezones": [
+                        "Asia/Tokyo",
+                        "Europe/London",
+                        "America/New_York"
+                    ],
+                    "useBlur": false,
+                    "widgetOpacity": 100,
+                    "widgetScale": 100,
+                    "x": 80,
+                    "y": 200
+                }
+            }
+        },
+        "iris": {
+            "appearance": {
+                "accent": "wallpaper",
+                "afterglow": {
+                    "atmosphere": 60,
+                    "bloom": 50,
+                    "chrome": 65,
+                    "signal": 35
+                },
+                "aura": "vivid",
+                "controlPlate": "glass",
+                "figureWeight": "light",
+                "fontFamily": "Roboto Flex",
+                "glass": {
+                    "edgeLight": 0,
+                    "mode": "wallpaper",
+                    "tint": 16
+                },
+                "highlight": "wallpaper",
+                "morph": "liquid",
+                "numbersFontFamily": "Roboto Flex",
+                "settingsHost": "window",
+                "settingsLayout": "home",
+                "texture": "solid",
+                "theme": {
+                    "bounce": 120,
+                    "edges": "line",
+                    "glow": 20,
+                    "lightReach": 170,
+                    "lines": 0,
+                    "melt": 55,
+                    "pieceShape": "square",
+                    "rim": false,
+                    "shadow": 110,
+                    "shape": 115,
+                    "surface": "wallpaper"
+                },
+                "themeId": "liquid-glass",
+                "tune": {
+                    "ink": {
+                        "widgets": 120
+                    },
+                    "light": {
+                        "tone": 0
+                    }
+                }
+            },
+            "bar": {
+                "autoHide": true,
+                "clockAccent": "accent",
+                "desktopBlocks": [
+                    "profile",
+                    "context",
+                    "forecast",
+                    "agenda",
+                    "modules"
+                ],
+                "fullEnd": [
+                    "tray",
+                    "notifications",
+                    "sound",
+                    "battery",
+                    "controls"
+                ],
+                "height": 44,
+                "layout": "full",
+                "navItems": [
+                    "media",
+                    "activity",
+                    "desktop",
+                    "tray",
+                    "tools",
+                    "focus",
+                    "today",
+                    "controls",
+                    "settings"
+                ],
+                "notch": false,
+                "padding": 90,
+                "position": "left",
+                "revealOnEmpty": false,
+                "satelliteGap": 8,
+                "shape": "round"
+            },
+            "bubbles": {
+                "reserve": false,
+                "scale": 108
+            },
+            "controlCenter": {
+                "accent": "accent",
+                "controls": "round",
+                "labels": false
+            },
+            "dock": {
+                "iconSize": 44,
+                "position": "bottom",
+                "revealOnEmpty": false
+            },
+            "lock": {
+                "type": {
+                    "clockWeight": 300
+                }
+            },
+            "surround": {
+                "enable": false,
+                "radius": 30,
+                "thickness": 8
+            },
+            "widgets": {
+                "radius": 30,
+                "tint": "system",
+                "weight": "light"
+            }
+        },
+        "material": {
+            "bar": {
+                "blurBackground": {
+                    "enabled": false,
+                    "overlayOpacity": 0.3
+                },
+                "clock": {
+                    "dateFontFamily": "",
+                    "datePixelSize": 0,
+                    "timeFontFamily": "",
+                    "timePixelSize": 0
+                },
+                "edgeModulesLayout": {
+                    "leftOrder": [
+                        "leftSidebarButton",
+                        "activeWindow"
+                    ],
+                    "rightOrder": [
+                        "rightSidebarButton",
+                        "sysTray",
+                        "weather"
+                    ]
+                },
+                "m3": {
+                    "borderless": "pills",
+                    "clock": {
+                        "dateFontFamily": "",
+                        "datePixelSize": 0,
+                        "timeFontFamily": "",
+                        "timePixelSize": 0
+                    },
+                    "cornerStyle": 3,
+                    "customLayoutSaved": false,
+                    "customLayouts": {
+                        "leftLayout": [
+                        ],
+                        "middleLayout": [
+                        ],
+                        "rightLayout": [
+                        ]
+                    },
+                    "divider": {
+                        "spacing": 20,
+                        "style": "rect"
+                    },
+                    "dockToPanel": {
+                        "buttonSize": 0,
+                        "buttonSpacing": 2,
+                        "iconSize": 0
+                    },
+                    "gapsOut": 5,
+                    "indicators": {
+                        "notifications": {
+                            "showUnreadCount": false
+                        }
+                    },
+                    "layoutMode": "compact",
+                    "layouts": {
+                        "leftLayout": [
+                            "leftSidebarButton",
+                            "media",
+                            "workspaces"
+                        ],
+                        "middleLayout": [
+                            "docktoPanel"
+                        ],
+                        "rightLayout": [
+                            "utilButtons",
+                            "weatherBar",
+                            "clockWidget",
+                            "systemIcons",
+                            "rightSidebarButton"
+                        ]
+                    },
+                    "media": {
+                        "alwaysVisible": false,
+                        "maxWidth": 280,
+                        "minWidth": 100,
+                        "onlyTitle": false,
+                        "preferredPlayer": ""
+                    },
+                    "resources": {
+                        "alwaysShowCpu": true,
+                        "alwaysShowCpuTemp": false,
+                        "alwaysShowDisk": false,
+                        "alwaysShowRam": true,
+                        "alwaysShowSwap": false,
+                        "cpuWarningThreshold": 90,
+                        "memoryWarningThreshold": 95,
+                        "showValue": false,
+                        "style": "filled",
+                        "swapWarningThreshold": 85
+                    },
+                    "showBackground": true,
+                    "tooltips": {
+                        "clickToShow": false
+                    },
+                    "tray": {
+                        "monochromeIcons": true
+                    },
+                    "utilButtons": {
+                        "showColorPicker": false,
+                        "showDarkModeToggle": true,
+                        "showKeyboardToggle": true,
+                        "showMicToggle": false,
+                        "showPerformanceProfileToggle": false,
+                        "showScreenRecord": false,
+                        "showScreenSnip": true,
+                        "showWallpaperToggle": false
+                    },
+                    "verbose": true,
+                    "workspaces": {
+                        "alwaysShowNumbers": false,
+                        "indicatorStyle": "dot",
+                        "monochromeIcons": true,
+                        "numberMap": [
+                            "1",
+                            "2"
+                        ],
+                        "showAppIcons": true,
+                        "useNerdFont": false
+                    }
+                },
+                "modulesLayout": {
+                    "order": [
+                        "resources",
+                        "media",
+                        "workspaces",
+                        "clock",
+                        "utilButtons",
+                        "battery"
+                    ]
+                },
+                "modulesPlacement": {
+                    "battery": "end",
+                    "clock": "end",
+                    "media": "start",
+                    "resources": "start",
+                    "utilButtons": "end",
+                    "workspaces": "center"
+                },
+                "vignette": {
+                    "enabled": false,
+                    "intensity": 0.6,
+                    "radius": 0.5
+                },
+                "workspaces": {
+                    "automaticIndicatorColor": true,
+                    "dynamicCount": true,
+                    "indicatorColor": "",
+                    "scrollSteps": 3,
+                    "wrapAround": true
+                }
+            },
+            "dock": {
+                "cardStyle": false,
+                "hoverPreview": true,
+                "hoverPreviewDelay": 400,
+                "keepPreviewOnClick": false,
+                "maxIndicatorDots": 5,
+                "minimizeUnfocused": false,
+                "position": "bottom",
+                "showAllWindowDots": true,
+                "showOnDesktop": true,
+                "smartIndicator": true
+            },
+            "notifications": {
+                "scaleOnHover": false
+            },
+            "settingsUi": {
+                "design": "expressive"
+            },
+            "sidebar": {
+                "keepLeftSidebarLoaded": true,
+                "openFolderOnDownload": false,
+                "widgets": {
+                    "contextShowWeather": true,
+                    "quickLaunch": [
+                        {
+                            "cmd": "/usr/bin/nautilus",
+                            "icon": "folder",
+                            "name": "Files"
+                        },
+                        {
+                            "cmd": "/usr/bin/kitty",
+                            "icon": "terminal",
+                            "name": "Terminal"
+                        },
+                        {
+                            "cmd": "/usr/bin/firefox",
+                            "icon": "web",
+                            "name": "Browser"
+                        },
+                        {
+                            "cmd": "/usr/bin/code",
+                            "icon": "code",
+                            "name": "Code"
+                        }
+                    ],
+                    "quickWallpaper": {
+                        "itemSize": 72,
+                        "showHeader": true
+                    },
+                    "wallpaper": false
+                }
+            }
+        },
+        "panelFamily": "iris",
+        "waffles": {
+            "bar": {
+                "activationWatermark": {
+                    "enable": true
+                }
+            },
+            "notifications": {
+                "scaleOnHover": false
+            },
+            "taskView": {
+                "names": [
+                ]
+            },
+            "theming": {
+                "styleFromMaterial": true
+            }
+        }
+    }
+}

@@ -6,8 +6,9 @@
 --   Any option:  :help 'scrolloff'  (with the quotes) explains it.
 --
 --   init.lua             options, plugins, language servers (this file)
---   lua/wall.lua         colour scheme made from the wallpaper
---   lua/kitty_solid.lua  makes the kitty window opaque while Neovim runs
+--   lua/theme.lua        colour schemes (everforest, kanagawa, gruvbox, wall)
+--   lua/start.lua        start screen (pixel-art dog + menu) for a bare `nvim`
+--   lua/kitty_solid.lua  makes the kitty window solid, Neovim-coloured, while Neovim runs
 -- ============================================================================
 
 -- OPTIONS --------------------------------------------------------------------
@@ -25,6 +26,10 @@ vim.o.clipboard = "unnamedplus" -- y and p use the system clipboard (Ctrl-C/Ctrl
 vim.o.undofile = true -- undo history is kept after closing a file
 vim.o.swapfile = false -- no .swp files, no "ATTENTION" warnings
 vim.o.winborder = "rounded" -- border around popups
+vim.o.title = true -- name the kitty window "nvim: file". niri sees the name and makes
+vim.o.titlestring = "nvim: %t" -- the window square (rule in niri's 90-user-extra.kdl)
+vim.o.laststatus = 0 -- no status line (Ctrl-g shows the file name and if it's saved)
+vim.opt.fillchars = { eob = " " } -- no ~ on the empty lines after the end of the file
 
 -- PLUGINS (vim.pack, built into Neovim) --------------------------------------
 -- None of these add shortcuts; they work in the background.
@@ -34,8 +39,15 @@ vim.pack.add({
   "https://github.com/mason-org/mason.nvim", -- :Mason installs/updates language servers
 })
 
-vim.cmd.colorscheme("wall")
+-- Colour scheme: the current look picks it (`rice <look>` writes the name to
+-- ~/.config/rice/nvim-colorscheme). Without a look it's everforest.
+-- Others: kanagawa, gruvbox, zenbones, wall (try :colorscheme <Tab>).
+local ok, scheme = pcall(vim.fn.readfile, vim.fn.expand("~/.config/rice/nvim-colorscheme"))
+if not (ok and scheme[1] and pcall(vim.cmd.colorscheme, scheme[1])) then
+  vim.cmd.colorscheme("everforest")
+end
 require("kitty_solid")
+require("start") -- start screen when Neovim opens without a file
 
 -- Flash the text you just copied with y.
 vim.api.nvim_create_autocmd("TextYankPost", {

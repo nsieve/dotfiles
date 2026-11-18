@@ -144,6 +144,7 @@
         "iconTheme": "WhiteSur-dark",
         "palette": {
             "accentColor": "",
+            "harmony": "accent",
             "type": "auto"
         },
         "recentThemes": [],
@@ -271,7 +272,7 @@
             "auroraOverlayOpacity": 0.38,
             "blurRadius": 40,
             "contrast": 0,
-            "dim": 40,
+            "dim": 0,
             "enable": true,
             "enableAnimatedBlur": false,
             "enableAnimation": false,
@@ -437,6 +438,8 @@
                 "dim": 0,
                 "displayMode": "ring",
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -454,6 +457,7 @@
                 "showBorder": true,
                 "showRate": true,
                 "showTime": true,
+                "sizeClass": "",
                 "useBlur": false,
                 "widgetOpacity": 100,
                 "widgetScale": 100,
@@ -468,6 +472,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "groupByDay": true,
                 "locked": false,
                 "maxEvents": 5,
@@ -484,6 +490,7 @@
                 "showDate": true,
                 "showLocation": false,
                 "showTime": true,
+                "sizeClass": "",
                 "style": "card",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -525,6 +532,8 @@
                 "dim": 0,
                 "enable": false,
                 "fontFamily": "Space Grotesk",
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "instrumentNumerals": true,
                 "instrumentTrail": true,
                 "instrumentTrailLength": 6,
@@ -562,8 +571,11 @@
             "controls": {
                 "cornerRadius": -1,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "placementStrategy": "free",
+                "sizeClass": "",
                 "widgetScale": 100,
                 "x": 120,
                 "y": 420
@@ -573,6 +585,8 @@
                 "enable": false,
                 "fitMode": "cover",
                 "folder": "",
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "intervalSeconds": 30,
                 "locked": false,
                 "mediaFilter": "all",
@@ -587,6 +601,7 @@
                 "path": "",
                 "placementStrategy": "free",
                 "shape": "Cookie4Sided",
+                "sizeClass": "",
                 "sourceMode": "file",
                 "transitionDuration": 450,
                 "widgetOpacity": 100,
@@ -602,6 +617,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "instrumentMarks": true,
                 "locked": false,
                 "palette": {
@@ -617,6 +634,7 @@
                 "showOrdinal": true,
                 "showWeekday": true,
                 "showYear": true,
+                "sizeClass": "",
                 "style": "ticket",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -634,6 +652,8 @@
                 "dim": 0,
                 "enable": false,
                 "fontScale": 100,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "hourLabels": true,
                 "locked": false,
                 "palette": {
@@ -648,6 +668,7 @@
                 "showBorder": false,
                 "showDate": true,
                 "showIcon": true,
+                "sizeClass": "",
                 "style": "ring",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -658,6 +679,7 @@
             "design": "individual",
             "designUndo": [],
             "dynamicOpacity": 0,
+            "editCard": true,
             "editGrid": {
                 "size": 32,
                 "snap": true
@@ -672,6 +694,8 @@
                 "dim": 0,
                 "enable": false,
                 "footer": "YOUR OWN PERSPECTIVE",
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -684,6 +708,7 @@
                 "showAccent": true,
                 "showBackground": true,
                 "showBorder": false,
+                "sizeClass": "",
                 "style": "poster",
                 "title": "Make room for wonder.",
                 "useBlur": false,
@@ -714,6 +739,7 @@
                 "selectedFormat": "webp",
                 "showBackground": true,
                 "showBorder": true,
+                "sizeClass": "",
                 "useBlur": false,
                 "widgetOpacity": 100,
                 "widgetScale": 100,
@@ -737,6 +763,8 @@
                 "fontPreset": "mincho",
                 "footerSize": 14,
                 "footerText": "PACIFIC DRIVE-IN",
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "latinFontFamily": "",
                 "latinWeight": 600,
                 "letterSpacing": 2,
@@ -784,6 +812,7 @@
                 "showRule": true,
                 "showSeal": true,
                 "showSecondary": true,
+                "sizeClass": "",
                 "useBlur": false,
                 "widgetOpacity": 100,
                 "widgetScale": 100,
@@ -791,6 +820,18 @@
                 "y": 120
             },
             "layerOrder": [],
+            "lyrics": {
+                "cornerRadius": -1,
+                "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
+                "locked": false,
+                "placementStrategy": "free",
+                "sizeClass": "",
+                "widgetScale": 100,
+                "x": 520,
+                "y": 600
+            },
             "mascot": {
                 "anchorWidget": "",
                 "backgroundOpacity": 0.16,
@@ -801,6 +842,8 @@
                 "customPath": "",
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -815,6 +858,7 @@
                 "posePickerMode": "buttons",
                 "showBackground": true,
                 "showBorder": false,
+                "sizeClass": "",
                 "useBlur": false,
                 "widgetOpacity": 100,
                 "widgetScale": 100,
@@ -829,6 +873,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "lyricsExpanded": false,
                 "organicCompression": 0,
@@ -851,6 +897,7 @@
                 "playerPreset": "full",
                 "showBackground": true,
                 "showBorder": true,
+                "sizeClass": "",
                 "useBlur": false,
                 "visualizerAccentStrength": 70,
                 "visualizerBarCount": 32,
@@ -906,6 +953,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -919,6 +968,7 @@
                 "showBackground": true,
                 "showBorder": true,
                 "showMeta": true,
+                "sizeClass": "",
                 "style": "card",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -936,6 +986,8 @@
                 "enable": false,
                 "fontFamily": "sans",
                 "fontSize": 14,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -948,6 +1000,7 @@
                 "showBackground": true,
                 "showBorder": true,
                 "showRules": true,
+                "sizeClass": "",
                 "style": "card",
                 "text": "",
                 "textAlign": "left",
@@ -1002,6 +1055,18 @@
                     "width": 1920
                 }
             ],
+            "palette": {
+                "cornerRadius": -1,
+                "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
+                "locked": false,
+                "placementStrategy": "free",
+                "sizeClass": "",
+                "widgetScale": 100,
+                "x": 120,
+                "y": 600
+            },
             "powerSaving": {
                 "enable": true,
                 "pauseOnFullscreen": true,
@@ -1013,8 +1078,11 @@
             "screenTime": {
                 "cornerRadius": -1,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "placementStrategy": "free",
+                "sizeClass": "",
                 "widgetScale": 100,
                 "x": 120,
                 "y": 240
@@ -1028,6 +1096,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "outline": false,
                 "palette": {
@@ -1041,6 +1111,7 @@
                 "shape": "Flower",
                 "showBackground": true,
                 "showBorder": false,
+                "sizeClass": "",
                 "strokeWidth": 3,
                 "treatment": "flat",
                 "useBlur": false,
@@ -1063,6 +1134,8 @@
                 "displayMode": "bars",
                 "enable": false,
                 "fillOpacity": 0.7,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "graphFillOpacity": 0.3,
                 "locked": false,
                 "palette": {
@@ -1083,6 +1156,7 @@
                 "showLabels": true,
                 "showMemory": true,
                 "showTemp": false,
+                "sizeClass": "",
                 "trackAlpha": 0.08,
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -1098,6 +1172,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "glow": true,
                 "locked": false,
                 "palette": {
@@ -1113,6 +1189,7 @@
                 "showHundredths": true,
                 "showProgress": true,
                 "showState": true,
+                "sizeClass": "",
                 "style": "cards",
                 "useBlur": false,
                 "vertical": false,
@@ -1160,6 +1237,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "locked": false,
                 "palette": {
                     "primary": "primary",
@@ -1173,6 +1252,7 @@
                 "showBorder": true,
                 "showBreakdown": true,
                 "showSince": true,
+                "sizeClass": "",
                 "style": "row",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -1204,6 +1284,7 @@
                 "showBorder": true,
                 "showHostname": true,
                 "showWeather": true,
+                "sizeClass": "",
                 "style": "card",
                 "useBlur": false,
                 "widgetOpacity": 100,
@@ -1229,6 +1310,8 @@
                 "edgeSoftness": 28,
                 "enable": false,
                 "fillRatio": 90,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "frequencyProfile": "flat",
                 "lineWidth": 2,
                 "locked": false,
@@ -1253,6 +1336,7 @@
                 "preset": "default",
                 "showBackground": true,
                 "showBorder": true,
+                "sizeClass": "",
                 "smoothing": 2,
                 "useBlur": false,
                 "vizType": "bars",
@@ -1272,6 +1356,8 @@
                 "cornerRadius": -1,
                 "dim": 0,
                 "enable": false,
+                "freeHeight": 0,
+                "freeWidth": 0,
                 "iconSize": 80,
                 "locked": false,
                 "padding": 20,
@@ -1294,6 +1380,7 @@
                 "showSunTimes": true,
                 "showTemp": true,
                 "size": 200,
+                "sizeClass": "",
                 "style": "pill",
                 "tempFontWeight": 500,
                 "tempSize": 80,
@@ -1330,6 +1417,7 @@
                 "showDayState": true,
                 "showNames": true,
                 "showOffsets": true,
+                "sizeClass": "",
                 "style": "cards",
                 "timezones": [
                     "Asia/Tokyo",
@@ -1497,6 +1585,15 @@
         "password": "",
         "ssid": "iNiR Hotspot"
     },
+    "hub": {
+        "social": {
+            "items": {},
+            "share": true
+        },
+        "sort": "popular",
+        "sources": [],
+        "view": "list"
+    },
     "idle": {
         "lockBeforeSleep": true,
         "lockTimeout": 600,
@@ -1554,6 +1651,7 @@
             "customize": "shell",
             "darkStyle": "style",
             "density": 1,
+            "design": "iris",
             "expandedRadius": 22,
             "factoryLook": 4,
             "figureWeight": "light",
@@ -1564,28 +1662,111 @@
                 "edgeColour": "scene",
                 "edgeLight": 0,
                 "edgeLine": 0,
-                "exactTint": true,
                 "mode": "wallpaper",
                 "tint": 16
             },
             "highlight": "wallpaper",
             "icons": {
+                "colour": "auto",
+                "fill": "auto",
+                "glyphs": "rounded",
                 "plate": "black",
-                "style": "glyph"
+                "shape": "auto",
+                "style": "glyph",
+                "weight": "regular"
             },
             "inkStyle": "washi",
             "language": "iris",
+            "leak": {
+                "backdrop": "picture",
+                "develop": true,
+                "dust": 0,
+                "frame": 100,
+                "gate": false,
+                "grade": "haze",
+                "grain": 55,
+                "grainSize": 1.6,
+                "light": 60,
+                "prism": 15,
+                "shape": "haze",
+                "spill": 35,
+                "streaks": 0,
+                "wallpaper": 50,
+                "widgets": 100,
+                "x": 0,
+                "y": 0
+            },
+            "look": "apple",
+            "looks": {
+                "gel": {
+                    "body": "accent",
+                    "gloss": 60,
+                    "round": true
+                },
+                "nothing": {
+                    "chosen": "ink",
+                    "figures": "dots"
+                },
+                "synth": {
+                    "depth": 3,
+                    "keys": "accent",
+                    "levels": "highlight",
+                    "mono": true
+                }
+            },
             "materialForApps": true,
             "morph": "liquid",
             "motion": true,
             "motionDuration": 220,
+            "nothingOn": {
+                "dock": true,
+                "island": true,
+                "lock": true,
+                "notifications": true,
+                "orbit": true,
+                "osd": true,
+                "settings": true,
+                "spotlight": true,
+                "widgets": true
+            },
             "numbersFontFamily": "Roboto Flex",
+            "places": {
+                "control": "",
+                "dock": "",
+                "island": "",
+                "lock": "",
+                "notifications": "",
+                "orbit": "",
+                "osd": "",
+                "settings": "",
+                "spotlight": "",
+                "widgets": ""
+            },
             "preset": "iris",
             "previews": true,
             "saved": [],
             "scheme": "auto",
+            "settingsHome": [
+                "iris.appearance.scheme",
+                "iris.appearance.accent",
+                "iris.appearance.look",
+                "iris.appearance.glass.mode",
+                "notifications.silent",
+                "nightLight",
+                "gameMode"
+            ],
             "settingsHost": "window",
             "settingsLayout": "home",
+            "settingsOriginal": false,
+            "settingsPanel": "prism",
+            "settingsRail": "auto",
+            "signal": "nothing",
+            "streak": {
+                "aurora": 55,
+                "colours": "aurora",
+                "light": 75,
+                "trails": 60
+            },
             "surfaces": {
                 "cards": {
                     "design": "welded",
@@ -1710,21 +1891,18 @@
             "tune": {
                 "dark": {
                     "colour": 100,
-                    "lume": false,
                     "tone": 0,
                     "warmth": 20,
                     "widgets": 100
                 },
                 "ink": {
                     "colour": 100,
-                    "lume": true,
                     "tone": 0,
                     "warmth": 50,
                     "widgets": 120
                 },
                 "light": {
                     "colour": 85,
-                    "lume": true,
                     "tone": 0,
                     "warmth": 38,
                     "widgets": 110
@@ -1733,6 +1911,23 @@
             "variant": "tonalSpot"
         },
         "bar": {
+            "activities": {
+                "call": true,
+                "camera": true,
+                "media": true,
+                "micGlow": false,
+                "order": [
+                    "record",
+                    "timer",
+                    "task",
+                    "camera",
+                    "call",
+                    "media"
+                ],
+                "record": true,
+                "task": true,
+                "timer": true
+            },
             "autoHide": true,
             "auxiliary": "tray",
             "blockStyle": "plain",
@@ -1741,6 +1936,8 @@
             "clockScale": 100,
             "clockStyle": "dateTime",
             "composition": "cluster",
+            "design": "halo",
+            "designFace": true,
             "desktopBanner": "wallpaper",
             "desktopBannerBlur": 0,
             "desktopBannerFade": 100,
@@ -1754,6 +1951,76 @@
                 "modules"
             ],
             "events": true,
+            "faces": {
+                "aura": {
+                    "colours": "spectrum",
+                    "turns": true
+                },
+                "comet": {
+                    "colours": "spectrum",
+                    "counts": "hour",
+                    "laps": true,
+                    "trail": "tail"
+                },
+                "dial": {
+                    "beside": "day",
+                    "marks": "hours"
+                },
+                "duo": {
+                    "temperature": true
+                },
+                "forecast": {
+                    "colour": true,
+                    "hours": 3,
+                    "labels": true
+                },
+                "glyph": {
+                    "events": true,
+                    "figure": true,
+                    "foot": "battery",
+                    "notifications": true
+                },
+                "headline": {
+                    "beside": "sky",
+                    "temperature": true
+                },
+                "ledger": {
+                    "ahead": 720
+                },
+                "lumen": {
+                    "light": "battery",
+                    "pool": true
+                },
+                "marquee": {
+                    "events": true,
+                    "sun": true,
+                    "weather": true
+                },
+                "rings": {
+                    "inner": "month",
+                    "middle": "battery",
+                    "outer": "day"
+                },
+                "status": {
+                    "carry": "auto",
+                    "connection": true,
+                    "sound": true
+                },
+                "tide": {
+                    "figure": true,
+                    "fill": "battery"
+                },
+                "tiles": {
+                    "day": true,
+                    "lit": "hour"
+                },
+                "world": {
+                    "apart": true,
+                    "second": "none",
+                    "watch": true,
+                    "zone": "Asia/Tokyo"
+                }
+            },
             "fullCenter": [
                 "island"
             ],
@@ -1768,8 +2035,6 @@
                 "workspaces",
                 "window"
             ],
-            "glassColour": "#ffffff",
-            "glassTint": 25,
             "height": 44,
             "hoverDelay": 300,
             "hoverExpand": true,
@@ -1797,6 +2062,25 @@
             ],
             "notch": false,
             "notchCurve": 100,
+            "notices": {
+                "battery": true,
+                "focus": true,
+                "gameMode": true,
+                "jobs": true,
+                "niri": true,
+                "rain": true,
+                "recording": true,
+                "screenshot": true,
+                "seconds": 2.5,
+                "shelf": true,
+                "silent": true,
+                "soundGuard": true,
+                "style": "compact",
+                "timers": true,
+                "unlock": true,
+                "upcoming": true,
+                "upcomingLead": 10
+            },
             "padding": 90,
             "pageWidth": 440,
             "pieces": [],
@@ -1805,6 +2089,7 @@
             "reserveSpace": true,
             "revealOnEmpty": false,
             "rightModules": [],
+            "rise": "deep",
             "satelliteGap": 8,
             "satelliteScale": 100,
             "screenList": [],
@@ -1812,15 +2097,23 @@
             "scrollBubbles": true,
             "shape": "round",
             "strip": "clear",
+            "sunLight": true,
             "trailing": "controls"
         },
         "bubbles": {
             "apps": [],
             "attach": true,
             "cluster": true,
+            "design": "glass",
             "edgeGap": 20,
             "extras": {
                 "anime": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
+                "awake": {
                     "enable": false,
                     "fx": 0.5,
                     "fy": 0.5,
@@ -1844,6 +2137,12 @@
                     "fy": 0.5,
                     "place": "right"
                 },
+                "capture": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
                 "clock": {
                     "enable": false,
                     "fx": 0.5,
@@ -1857,6 +2156,12 @@
                     "place": "right"
                 },
                 "focus": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
+                "keyboard": {
                     "enable": false,
                     "fx": 0.5,
                     "fy": 0.5,
@@ -1880,7 +2185,19 @@
                     "fy": 0.5,
                     "place": "right"
                 },
+                "nightLight": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
                 "notifications": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
+                "power": {
                     "enable": false,
                     "fx": 0.5,
                     "fy": 0.5,
@@ -1934,6 +2251,12 @@
                     "fy": 0.5,
                     "place": "right"
                 },
+                "wallpaper": {
+                    "enable": false,
+                    "fx": 0.5,
+                    "fy": 0.5,
+                    "place": "right"
+                },
                 "watching": {
                     "enable": false,
                     "fx": 0.5,
@@ -1954,6 +2277,7 @@
                     "place": "right"
                 }
             },
+            "fromCorner": true,
             "join": "notch",
             "left": {
                 "fx": 0.5,
@@ -1962,6 +2286,7 @@
             },
             "notchCurve": 100,
             "opens": "card",
+            "order": [],
             "reserve": false,
             "right": {
                 "fx": 0.5,
@@ -1974,7 +2299,9 @@
                 "fx": 0.5,
                 "fy": 0.5,
                 "place": "island"
-            }
+            },
+            "autoHide": false,
+            "revealOnEmpty": true
         },
         "controlCenter": {
             "accent": "accent",
@@ -2246,6 +2573,8 @@
         },
         "surround": {
             "enable": false,
+            "holoHalo": 40,
+            "holoLight": 45,
             "music": "widget",
             "musicAppearance": "etched",
             "musicColour": "pearl",
@@ -2256,6 +2585,11 @@
             "musicSpeed": 100,
             "musicStrength": 160,
             "radius": 30,
+            "rail": "none",
+            "railApps": "top",
+            "railButtons": true,
+            "railSize": 46,
+            "style": "plain",
             "thickness": 8
         },
         "tray": {
@@ -2270,18 +2604,19 @@
             "liveQuality": "best",
             "motion": true,
             "onlineSort": "top",
+            "picker": "iris",
             "pinned": [],
+            "ratio": "screen",
             "sort": "newest",
             "sources": [
                 "wallhaven",
                 "live"
             ],
             "suggestive": false,
-            "thumbnailSize": 228,
-            "topRange": "1w",
-            "width": 960
+            "topRange": "1w"
         },
         "widgets": {
+            "blur": 100,
             "brightWallpapers": false,
             "design": "iris",
             "legibleAlways": false,
@@ -2945,6 +3280,7 @@
             "smartIndicator": true,
             "style": "m3"
         },
+        "factoryLook": 1,
         "lock": {
             "blur": {
                 "enable": true,
@@ -2985,15 +3321,14 @@
         },
         "settingsUi": {
             "categories": "",
-            "chromeLayout": "",
+            "design": "expressive",
             "easyMode": false,
             "overlayAppearance": {
                 "backdropBlur": 0,
                 "backgroundOpacity": 1,
                 "scrimDim": 35
             },
-            "overlayMode": true,
-            "overlayStyle": "rail"
+            "overlayMode": true
         },
         "sidebar": {
             "ai": {
@@ -3170,7 +3505,7 @@
                     "itemSize": 72,
                     "showHeader": true
                 },
-                "spacing": 8,
+                "spacing": 24,
                 "status": true,
                 "statusRings": {
                     "showBattery": true,
@@ -3288,7 +3623,8 @@
                     "popup": 0.42,
                     "subSurface": 0.52,
                     "tooltip": 0.35
-                }
+                },
+                "wallpaperColor": 0.55
             },
             "desaturation": {
                 "bar": true,
@@ -3429,6 +3765,7 @@
         },
         "screenList": [],
         "silent": false,
+        "silentApps": [],
         "timeout": 3000,
         "timeoutCritical": 0,
         "timeoutLow": 5000,
@@ -3812,13 +4149,21 @@
         "sloppy": false,
         "style": "default"
     },
+    "shelf": {
+        "clearOnLogout": false,
+        "enable": true,
+        "images": true,
+        "length": 24
+    },
     "shellUpdates": {
         "checkIntervalMinutes": 360,
         "dismissedAt": 0,
         "dismissedCommit": "",
         "enabled": true,
-        "lastNotifiedAt": 1794176427039,
-        "lastNotifiedCommit": "ae000740",
+        "lastNotifiedAt": 1794908100659,
+        "lastNotifiedCommit": "28365436",
+        "lastNotifiedHub": "ii@2.36.0",
+        "lastNotifiedHubAt": 1794568442357,
         "openTerminalOnUpdate": true,
         "remindDays": 3
     },
@@ -3932,7 +4277,7 @@
             "backdrop": {
                 "blurRadius": 32,
                 "contrast": 0,
-                "dim": 35,
+                "dim": 0,
                 "enable": true,
                 "enableAnimatedBlur": false,
                 "enableAnimation": false,
@@ -4085,13 +4430,15 @@
         },
         "taskView": {
             "closeOnSelect": false,
-            "mode": "centered"
+            "mode": "centered",
+            "names": []
         },
         "theming": {
             "font": {
                 "family": "Noto Sans",
                 "scale": 1
             },
+            "styleFromMaterial": true,
             "useMaterialColors": true
         },
         "tweaks": {
@@ -4109,6 +4456,7 @@
                 "session"
             ],
             "showColorScheme": false,
+            "showCustom": true,
             "showDateTime": true,
             "showFiles": true,
             "showMedia": true,
@@ -4121,8 +4469,7 @@
             "showTerminal": true,
             "showWallpaper": true,
             "showWeather": true
-        },
-        "workspaceNames": {}
+        }
     },
     "wallhaven": {
         "apiKey": "",
@@ -4194,40 +4541,13 @@
         "audioQuality": "best",
         "autoConnect": false,
         "browser": "",
-        "cache": {
-            "albums": [],
-            "liked": [],
-            "playlists": []
-        },
         "connected": false,
         "cookiesPath": "",
         "enable": false,
         "hideSyncBanner": false,
-        "lastLikedSync": "",
-        "liked": [],
         "normalizeVolume": true,
-        "playlists": [],
-        "profile": {
-            "avatar": "",
-            "name": "",
-            "url": ""
-        },
-        "queue": [],
-        "recentSearches": [],
         "repeatMode": 0,
         "resolvedBrowserArg": "",
-        "resume": {
-            "activePlaylist": [],
-            "activePlaylistSource": "",
-            "artist": "",
-            "currentIndex": -1,
-            "position": 0,
-            "thumbnail": "",
-            "title": "",
-            "url": "",
-            "videoId": "",
-            "wasPlaying": false
-        },
         "shuffleMode": false,
         "suppressUpNextInFullscreen": true,
         "upNextNotifications": true,

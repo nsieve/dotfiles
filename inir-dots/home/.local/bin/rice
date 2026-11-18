@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+# rice — switch between whole "looks" with one command.
+#
+#   rice                 show the current look and the saved ones
+#   rice <name>          switch to that look
+#   rice next            switch to the next saved look (handy for a keybind)
+#   rice save <name>     save how everything looks right now as <name>
+#
+# A look lives in ~/.config/rice/looks/<name>/ and has four parts:
+#   look.json   iNiR's own look file: wallpaper, colours, fonts, bar, dock,
+#               widgets, glass... (made by `inir look export`)
+#   kitty.conf  terminal look: opacity, font. Copied to ~/.config/kitty/rice.conf,
+#               which kitty.conf includes last. Colours still follow the wallpaper.
+#   nvim        Neovim colour scheme name (everforest, kanagawa, gruvbox, zenbones, wall)
+#   niri.kdl    optional compositor look (focus ring, borders...). Copied to
+#               ~/.config/niri/config.d/95-rice.kdl. Don't put options here that
+#               iNiR Settings manages (gaps, blur...): Settings would stop seeing them.
+#
+# Everything else (keybinds, input, window rules, the rest of config.json) is
+# shared: no look ever touches it. Every switch is undoable with `inir look history`.
+set -euo pipefail
+
+RICE="$HOME/.config/rice"
+LOOKS="$RICE/looks"
+KITTY_OUT="$HOME/.config/kitty/rice.conf"
+NIRI_OUT="$HOME/.config/niri/config.d/95-rice.kdl"
+NVIM_OUT="$RICE/nvim-colorscheme"          # read by ~/.config/nvim/init.lua
+KITTY_THEME="$HOME/.config/kitty/current-theme.conf"
+SWITCHWALL="$HOME/.config/quickshell/inir/scripts/colors/switchwall.sh"
+
+say() { printf '  \e[1m%s\e[0m %s\n' "$1" "${2:-}"; }
+die() { printf '  \e[31m%s\e[0m\n' "$*" >&2; exit 1; }
+current() { cat "$RICE/current" 2>/dev/null || true; }
+looks() { [[ -d "$LOOKS" ]] && find "$LOOKS" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort; }
+wallpaper() { jq -r '.background.wallpaperPath // empty' "$HOME/.config/inir/config.json"; }
+
+show() {
+    local cur; cur="$(current)"
+    say "look" "${cur:-none yet}"
+    local l
+    while IFS= read -r l; do
+        [[ -z "$l" ]] && continue
+        [[ "$l" == "$cur" ]] && printf '   * %s\n' "$l" || printf '     %s\n' "$l"
+    done <<< "$(looks)"
+    [[ -n "$(looks)" ]] || echo "     (none saved: rice save <name>)"
+}
+
+save() {
+    local name="$1" dir="$LOOKS/$1"
+    [[ "$name" =~ ^[a-z0-9_-]+$ ]] || die "names are lowercase letters, digits, - and _"
+    mkdir -p "$dir"
+    inir look export "$dir/look.json" --name "$name" >/dev/null
+    # Terminal and Neovim: what's active now (first save: kitty.conf's defaults).
+    if [[ -f "$KITTY_OUT" ]]; then cp "$KITTY_OUT" "$dir/kitty.conf"
+    else printf '# kitty look for "%s" (overrides kitty.conf)\nbackground_opacity 0.85\n' "$name" > "$dir/kitty.conf"; fi
+    [[ -f "$NVIM_OUT" ]] && cp "$NVIM_OUT" "$dir/nvim" || echo everforest > "$dir/nvim"
+    [[ -f "$NIRI_OUT" ]] && cp "$NIRI_OUT" "$dir/niri.kdl" \
+        || printf '// niri look for "%s": nothing extra\n' "$name" > "$dir/niri.kdl"
+    echo "$name" > "$RICE/current"
+    say "saved" "$name  →  $dir"
+}
+
+apply() {
+    local name="$1" dir="$LOOKS/$1"
+    [[ -f "$dir/look.json" ]] || die "no look called '$name' (rice save $name makes one)"
+    local wall_before theme_before
+    wall_before="$(wallpaper)"
+    theme_before="$(stat -c %Y "$KITTY_THEME" 2>/dev/null || echo 0)"
+
+    # 1. Shell: wallpaper, colours, bar, widgets (iNiR snapshots first).
+    inir look import "$dir/look.json" >/dev/null
+    say "shell" "$(jq -r '.family + " · " + (.wallpaper.path | split("/") | last)' "$dir/look.json")"
+
+    # New wallpaper → wait for iNiR to regenerate the colours; nudge it if it doesn't.
+    if [[ "$(wallpaper)" != "$wall_before" ]]; then
+        for _ in $(seq 20); do
+            [[ "$(stat -c %Y "$KITTY_THEME" 2>/dev/null || echo 0)" != "$theme_before" ]] && break
+            sleep 0.5
+        done
+        if [[ "$(stat -c %Y "$KITTY_THEME" 2>/dev/null || echo 0)" == "$theme_before" ]]; then
+            "$SWITCHWALL" --noswitch >/dev/null 2>&1 || true
+        fi
+        sleep 1   # let the last colour files land
+    fi
+
+    # 2. Compositor (niri reloads its config by itself).
+    cp "$dir/niri.kdl" "$NIRI_OUT" 2>/dev/null || printf '// no niri look\n' > "$NIRI_OUT"
+
+    # 3. Terminal: copy and reload every kitty.
+    cp "$dir/kitty.conf" "$KITTY_OUT"
+    pkill --signal SIGUSR1 -x kitty 2>/dev/null || true
+
+    # 4. Neovim: new scheme for future ones, and tell the open ones.
+    local scheme; scheme="$(head -n1 "$dir/nvim" 2>/dev/null || echo everforest)"
+    echo "$scheme" > "$NVIM_OUT"
+    sleep 0.3   # after kitty's reload, so Neovim's solid window wins
+    local sock
+    for sock in "${XDG_RUNTIME_DIR:-/run/user/$UID}"/nvim.*.0; do
+        [[ -S "$sock" ]] || continue
+        timeout 2 nvim --server "$sock" --remote-expr \
+            "execute('silent! colorscheme $scheme') . luaeval('pcall(function() require(\"kitty_solid\").refresh() end) and \"\" or \"\"')" \
+            >/dev/null 2>&1 || true
+    done
+    say "terminal" "$(grep -m1 '^background_opacity' "$dir/kitty.conf" || echo default)  ·  nvim $scheme"
+
+    echo "$name" > "$RICE/current"
+    say "look" "$name"
+}
+
+case "${1:-}" in
+    "" | list) show ;;
+    save) [[ -n "${2:-}" ]] || die "usage: rice save <name>"; save "$2" ;;
+    next)
+        mapfile -t all < <(looks)
+        (( ${#all[@]} )) || die "no looks saved yet"
+        cur="$(current)"; nxt="${all[0]}"
+        for i in "${!all[@]}"; do [[ "${all[$i]}" == "$cur" ]] && nxt="${all[$(( (i + 1) % ${#all[@]} ))]}"; done
+        apply "$nxt" ;;
+    -h | --help) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//' ;;
+    *) apply "$1" ;;
+esac

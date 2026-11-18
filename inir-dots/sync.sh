@@ -11,7 +11,8 @@ STAGE="$(mktemp -d "$REPO/.home.XXXXXX")"
 trap 'rm -rf "$STAGE"' EXIT
 
 # Junk that lives inside tracked dirs but shouldn't be committed.
-EXCLUDES=(--exclude=cached_layouts --exclude='*.bak' --exclude='*.lock')
+# start_me.lua: the nvim start screen's portrait of you; stays on this computer.
+EXCLUDES=(--exclude=cached_layouts --exclude='*.bak' --exclude='*.lock' --exclude=start_me.lua)
 
 while IFS= read -r line; do
     p="${line%%#*}"; p="${p%"${p##*[![:space:]]}"}"   # strip comments + trailing space

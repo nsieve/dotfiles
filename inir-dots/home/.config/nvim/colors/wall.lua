@@ -1,2 +1,2 @@
--- Colour scheme generated from the wallpaper. The real code is in lua/wall.lua.
-require("wall").load()
+-- Hand-made colour scheme; the colours are in lua/theme.lua.
+require("theme").load("wall")

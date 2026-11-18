@@ -1,5 +1,6 @@
 adw-gtk-theme
 adwaita-icon-theme
+android-tools
 anki
 avr-libc
 awww
@@ -37,6 +38,7 @@ fprintd
 frameworkintegration
 fuzzel
 fzf
+gamemode
 geoclue
 ghostscript
 git
@@ -66,7 +68,12 @@ kicad-library
 kirigami
 kitty
 kvantum
+lib32-gamemode
+lib32-mesa
+lib32-nvidia-utils
+lib32-vulkan-intel
 libdbusmenu-gtk3
+libliftoff
 libnotify
 libpulse
 libqalculate
@@ -74,6 +81,7 @@ libxcrypt-compat
 linux
 linux-firmware
 lsp-plugins-lv2
+lzip
 mission-center
 mkinitcpio
 mpv
@@ -86,6 +94,8 @@ nm-connection-editor
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
+nvidia-open
+nvidia-prime
 obsidian
 pacman-contrib
 papirus-icon-theme
@@ -131,6 +141,7 @@ socat
 sof-firmware
 songrec
 starship
+steam
 sudo
 swappy
 swayidle
@@ -183,6 +194,7 @@ unzip
 upower
 uv
 vulkan-intel
+waydroid
 wf-recorder
 wget
 wireplumber

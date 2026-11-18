@@ -59,3 +59,17 @@ output "AU Optronics 0xD0A2 Unknown" {
     scale 1.25
     position x=1920 y=0
 }
+
+// ── Neovim: square, focused window ──────────────────────────────────────────
+// A kitty window whose title starts with "nvim" (Neovim sets it, see init.lua) gets
+// square corners and stays fully opaque, even unfocused (30-window-rules dims inactive
+// windows to 0.95). niri re-checks the title live, so quitting Neovim undoes it.
+// Blur is off too: kitty is already solid while Neovim runs (lua/kitty_solid.lua).
+window-rule {
+    match app-id=r#"^kitty$"# title=r#"^nvim"#
+    geometry-corner-radius 0
+    opacity 1.0
+    background-effect {
+        blur false
+    }
+}

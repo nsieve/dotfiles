@@ -49,3 +49,4 @@ include "config.d/60-animations.kdl"
 include "config.d/70-binds.kdl"
 include "config.d/80-layer-rules.kdl"
 include "config.d/90-user-extra.kdl"
+include "config.d/95-rice.kdl"  // current look (rice); written by ~/.local/bin/rice
